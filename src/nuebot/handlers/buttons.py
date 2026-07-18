@@ -21,7 +21,7 @@ from aiogram.types import (
     InlineKeyboardMarkup,
 )
 
-from ..config import get_settings
+from ..config import load_generation_settings
 from ..jobs.manager import JobManager, JobParams, apply_result_info, new_task_id
 from ..sd.client import (
     build_extra_payload,
@@ -166,8 +166,8 @@ async def _run_txt2img(
     with_hr: bool,
 ) -> tuple[str, bytes] | None:
     """Devuelve (task_id_nuevo, png_bytes). None si falla."""
-    s = get_settings()
-    hr_block = build_hr_block(upscaler=s.hr_upscaler, steps=params.steps) if with_hr else None
+    generation = load_generation_settings()
+    hr_block = build_hr_block(steps=params.steps, settings=generation) if with_hr else None
     payload = build_txt2img_payload(
         prompt=params.prompt,
         negative_prompt=params.negative_prompt,
@@ -178,9 +178,11 @@ async def _run_txt2img(
         sampler=params.sampler,
         scheduler=params.scheduler,
         seed=params.seed,
+        n_iter=1,
         hr=hr_block,
+        settings=generation,
     )
-    result = await sd.txt2img(payload)
+    result = await sd.txt2img(payload, payload_init=payload)
     img_b64 = result.images_b64[0]
     png = base64.b64decode(img_b64)
 
@@ -210,6 +212,8 @@ async def on_repeat(callback: CallbackQuery, callback_data: Repeat, bot: Bot,
             f"¿Es una imagen vieja sin bloque ⚙ en el caption?"
         )
         return
+    # ponytail: REPETIR conserva todo el snapshot salvo seed para variar el resultado.
+    params = replace(params, seed=-1)
     await _run_txt2img(bot, jobs, sd, callback.message.chat.id, params, with_hr=False)
 
 
@@ -238,7 +242,7 @@ async def on_final(callback: CallbackQuery, callback_data: FinalUpscale,
             f"¿Es una imagen vieja sin bloque ⚙ en el caption?"
         )
         return
-    s = get_settings()
+    generation = load_generation_settings()
     # Re-generamos con los mismos params en txt2img normal (rápido) y después
     # le pasamos la imagen al upscaler extra. Es la única forma de tener un
     # b64 base sin pedirle al usuario que la resubmita.
@@ -252,15 +256,13 @@ async def on_final(callback: CallbackQuery, callback_data: FinalUpscale,
         sampler=params.sampler,
         scheduler=params.scheduler,
         seed=params.seed,
+        n_iter=1,
+        settings=generation,
     )
-    result = await sd.txt2img(payload)
+    result = await sd.txt2img(payload, payload_init=payload)
     img_b64 = result.images_b64[0]
 
-    up_payload = build_extra_payload(
-        image_b64=img_b64,
-        upscaler=s.hr_upscaler,
-        resize_factor=s.final_upscale_factor,
-    )
+    up_payload = build_extra_payload(image_b64=img_b64, settings=generation)
     up_b64 = await sd.extra_single_image(up_payload)
     import base64
     png = base64.b64decode(up_b64)
@@ -269,7 +271,7 @@ async def on_final(callback: CallbackQuery, callback_data: FinalUpscale,
     final_params = apply_result_info(params, result.info_json)
     final_params = replace(final_params, kind="final")
     jobs.remember(new_id, final_params)
-    caption = format_caption(new_id, f"Final x{s.final_upscale_factor}", final_params)
+    caption = format_caption(new_id, f"Final x{generation.final_upscale['upscaling_resize']}", final_params)
     document = BufferedInputFile(png, filename=f"{new_id}_final.png")
     await bot.send_document(
         callback.message.chat.id,

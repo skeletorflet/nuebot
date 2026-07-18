@@ -122,7 +122,7 @@ class Job:
     prompt: str
     # Si repite desde botón, ya viene con los params exactos.
     params: JobParams | None = None
-    # El mensaje "🎨 Generando..." original, para editar.
+    # Mensaje "🎨 Generando..." original, para borrarlo al terminar.
     status_message_id: int | None = None
     # Lo que tenía que hacer (txt2img | hires | final). Solo txt2img se encola
     # desde el usuario; los demás los dispara el handler de botones directamente.
@@ -171,6 +171,12 @@ class JobManager:
 
     def pending_ids(self) -> list[str]:
         return list(self._pending.keys())
+
+    def set_status_message(self, task_id: str, message_id: int) -> None:
+        """Adjunta el id del mensaje de estado ("Generando...") a un job pendiente."""
+        job = self._pending.get(task_id) or self._current
+        if job is not None:
+            job.status_message_id = message_id
 
     # ---- Worker loop --------------------------------------------------------
 

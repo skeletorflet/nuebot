@@ -1,0 +1,41 @@
+{
+  "bot": {
+    "sd_api_url": "https://vndnl-34-16-67-255.run.pinggy-free.link",
+    "sd_fallback_api_url": "http://127.0.0.1:7860",
+    "sd_timeout_s": 600,
+    "allowed_user_id": null
+  },
+  "txt2img": {
+    "negative_prompt": "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry",
+    "width": 832,
+    "height": 1216,
+    "steps": 8,
+    "cfg_scale": 1,
+    "sampler_name": "Euler a",
+    "scheduler": "Simple",
+    "seed": -1,
+    "batch_size": 1,
+    "n_iter": 1,
+    "save_images": false,
+    "send_images": true,
+    "do_not_save_grid": true
+  },
+  "hr": {
+    "hr_upscaler": "4x_NMKD-Superscale-SP_178000_G",
+    "hr_scale": 1.25,
+    "hr_second_pass_ratio": 0.5,
+    "denoising_strength": 0.3,
+    "hr_additional_modules": ["Use same choices"]
+  },
+  "final_upscale": {
+    "upscaler_1": "4x_NMKD-Superscale-SP_178000_G",
+    "upscaler_2": "None",
+    "extras_upscaler_2_visibility": 0.0,
+    "upscale_first": true,
+    "resize_mode": 0,
+    "show_extras_results": false,
+    "upscaling_resize": 3.0,
+    "upscaling_crop": false,
+    "upscaling_safer": false
+  }
+}

@@ -5,19 +5,38 @@ Comandos (mensajes que empiezan con '/') los maneja el dispatcher central.
 """
 from __future__ import annotations
 
+import random
+import re
+from pathlib import Path
+
 from aiogram import Router
 from aiogram.filters import Command
 from aiogram.types import Message
 
-from ..config import get_settings
+from ..config import get_settings, load_generation_settings
 from ..jobs.manager import Job, JobManager, JobParams, new_task_id
 
 router = Router(name="generate")
+RESOURCES_DIR = Path(__file__).resolve().parents[3] / "resources"
+
+
+def expand_resource_tokens(prompt: str, resources_dir: Path = RESOURCES_DIR) -> str:
+    """Reemplaza cada token con stem de *.txt por una línea aleatoria no vacía."""
+    for path in resources_dir.glob("*.txt"):
+        if not re.search(rf"(?<!\w){re.escape(path.stem)}(?!\w)", prompt):
+            continue
+        lines = list(dict.fromkeys(
+            line.strip() for line in path.read_text(encoding="utf-8").splitlines() if line.strip()
+        ))
+        if lines:
+            options = "{" + "|".join(random.sample(lines, min(4, len(lines)))) + "}"
+            prompt = re.sub(rf"(?<!\w){re.escape(path.stem)}(?!\w)", lambda _: options, prompt)
+    return prompt
 
 
 def _is_authorized(user_id: int) -> bool:
-    s = get_settings()
-    return s.allowed_user_id is None or s.allowed_user_id == user_id
+    bot = get_settings().bot
+    return bot.allowed_user_id is None or bot.allowed_user_id == user_id
 
 
 @router.message(Command("start", "help"))
@@ -61,17 +80,18 @@ async def free_text_to_prompt(message: Message, jobs: JobManager) -> None:
         await message.answer("Mandame un prompt de al menos 3 palabras.")
         return
 
-    s = get_settings()
+    text = expand_resource_tokens(text)
+    generation = load_generation_settings().txt2img
     params = JobParams(
         prompt=text,
-        negative_prompt=s.negative_prompt,
-        width=s.default_width,
-        height=s.default_height,
-        steps=s.default_steps,
-        cfg_scale=s.default_cfg,
-        sampler=s.default_sampler,
-        scheduler=s.default_scheduler,
-        seed=-1,
+        negative_prompt=generation.negative_prompt,
+        width=generation.width,
+        height=generation.height,
+        steps=generation.steps,
+        cfg_scale=generation.cfg_scale,
+        sampler=generation.sampler_name,
+        scheduler=generation.scheduler,
+        seed=generation.seed,
         kind="txt2img",
     )
 
@@ -83,4 +103,4 @@ async def free_text_to_prompt(message: Message, jobs: JobManager) -> None:
         params=params,
     )
     pos = jobs.enqueue(job)
-    await message.answer(f"🟡 Encolado como `{task_id}` (posición {pos}).")
+    # Sin mensaje intermedio: el único mensaje nuevo será el resultado.

@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+import json
 import tempfile
 import unittest
 from pathlib import Path
 
 from nuebot.handlers.buttons import format_caption, parse_params_from_caption
 from nuebot.jobs.manager import JobManager, JobParams, apply_result_info
+from nuebot.sd.client import SDClient
 
 
 class DocumentResultTests(unittest.TestCase):
@@ -86,6 +88,22 @@ class DocumentResultTests(unittest.TestCase):
         params = self.make_params(prompt="palabra " * 400, negative_prompt="negativo " * 200)
         caption = format_caption("longtask", "txt2img", params)
         self.assertLessEqual(len(caption), 1024)
+
+    def test_debug_files_keep_initial_final_payload_and_api_result_together(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            client = SDClient.__new__(SDClient)
+            client._debug_dir = Path(tmp) / "debug"
+            client._write_debug_json("payload_init.json", {"prompt": "cute cat nose", "steps": 4})
+            client._write_debug_json("payload_final.json", {"prompt": "cute cat nose", "steps": 4, "seed": -1})
+            client._write_debug_json("resultado.json", {"info": "real seed 2418682888", "images": ["png-b64"]})
+
+            debug = client._debug_dir
+            self.assertEqual(json.loads((debug / "payload_init.json").read_text(encoding="utf-8"))["steps"], 4)
+            self.assertEqual(json.loads((debug / "payload_final.json").read_text(encoding="utf-8"))["seed"], -1)
+            self.assertEqual(
+                json.loads((debug / "resultado.json").read_text(encoding="utf-8"))["info"],
+                "real seed 2418682888",
+            )
 
 
 if __name__ == "__main__":
