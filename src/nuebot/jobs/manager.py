@@ -124,6 +124,10 @@ class Job:
     params: JobParams | None = None
     # Mensaje "🎨 Generando..." original, para borrarlo al terminar.
     status_message_id: int | None = None
+    # Mensaje del usuario con el prompt original (para borrarlo si falla).
+    user_message_id: int | None = None
+    # Prompt crudo del usuario (pre-resource-expansion). Para REINTENTAR tras falla.
+    raw_prompt: str | None = None
     # Lo que tenía que hacer (txt2img | hires | final). Solo txt2img se encola
     # desde el usuario; los demás los dispara el handler de botones directamente.
     kind: str = "txt2img"
@@ -143,6 +147,9 @@ class JobManager:
         self._cache: OrderedDict[str, JobParams] = OrderedDict()
         self._max_cache = max_cache
         self._cache_dir = cache_dir
+        # ponytail: raw_prompt del usuario sobrevive al fallo hasta que consuma REINTENTAR o hasta N entradas (FIFO).
+        self._retries: OrderedDict[str, str] = OrderedDict()
+        self._max_retries = 64
         if self._cache_dir is not None:
             self._cache_dir.mkdir(parents=True, exist_ok=True)
 
@@ -171,6 +178,15 @@ class JobManager:
 
     def pending_ids(self) -> list[str]:
         return list(self._pending.keys())
+
+    def store_retry(self, task_id: str, raw_prompt: str) -> None:
+        self._retries[task_id] = raw_prompt
+        self._retries.move_to_end(task_id)
+        while len(self._retries) > self._max_retries:
+            self._retries.popitem(last=False)
+
+    def pop_retry(self, task_id: str) -> str | None:
+        return self._retries.pop(task_id, None)
 
     def set_status_message(self, task_id: str, message_id: int) -> None:
         """Adjunta el id del mensaje de estado ("Generando...") a un job pendiente."""

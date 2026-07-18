@@ -17,6 +17,7 @@ from aiogram.client.default import DefaultBotProperties
 
 from .config import get_settings, load_generation_settings
 from .handlers import buttons, cancel, generate
+from .handlers.buttons import Retry
 from .jobs.manager import Job, JobManager, apply_result_info
 from .sd.client import SDClient
 
@@ -72,12 +73,32 @@ async def _handle_job(job: Job, bot: Bot, sd: SDClient, jobs: JobManager) -> Non
         )
 
     # asyncio.CancelledError debe propagarse para que el manager marque el future
-    # como cancelado; cualquier otro error deja el status visible para que el
-    # usuario sepa que la generación falló.
+    # como cancelado; cualquier otro error deja el status visible y le avisa al
+    # usuario con un botón REINTENTAR (que vuelve a mandar el prompt original).
     except asyncio.CancelledError:
         raise
-    except Exception:
-        return
+    except Exception as e:  # noqa: BLE001
+        log.exception("Fallo generando %s", job.task_id)
+        if job.raw_prompt:
+            jobs.store_retry(job.task_id, job.raw_prompt)
+        if job.user_message_id is not None:
+            try:
+                await bot.delete_message(job.chat_id, job.user_message_id)
+            except Exception:
+                pass
+        try:
+            from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+            markup = InlineKeyboardMarkup(inline_keyboard=[
+                [InlineKeyboardButton(text="🔁 REINTENTAR", callback_data=Retry(task_id=job.task_id).pack())]
+            ])
+            err = str(e).strip() or type(e).__name__
+            await bot.send_message(
+                job.chat_id,
+                f"❌ Falló la generación\n\n`{job.prompt}`\n\n<i>{err[:200]}</i>",
+                reply_markup=markup,
+            )
+        except Exception:
+            log.exception("No pude notificar el fallo al chat %s", job.chat_id)
 
     finally:
         chat_id = job.chat_id

@@ -46,6 +46,10 @@ class FinalUpscale(CallbackData, prefix="upx"):
     task_id: str
 
 
+class Retry(CallbackData, prefix="retry"):
+    task_id: str  # apunta al job cuyo prompt original queremos reintentar
+
+
 # --- Keyboards --------------------------------------------------------------
 
 def kb_txt2img(task_id: str) -> InlineKeyboardMarkup:
@@ -279,3 +283,20 @@ async def on_final(callback: CallbackQuery, callback_data: FinalUpscale,
         caption=caption,
         reply_markup=kb_final(new_id),
     )
+
+
+@router.callback_query(Retry.filter())
+async def on_retry(callback: CallbackQuery, callback_data: Retry, bot: Bot,
+                   jobs: JobManager) -> None:
+    raw = jobs.pop_retry(callback_data.task_id)
+    if not raw:
+        await callback.answer("El reintento ya se usó o expiró.", show_alert=True)
+        return
+    await callback.answer("🔁 Reintentando...")
+    try:
+        await bot.delete_message(callback.message.chat.id, callback.message.message_id)
+    except Exception:
+        pass
+    # Reusamos el flujo del usuario: manda un mensaje "virtual" con el prompt original.
+    from ..handlers.generate import _enqueue_prompt
+    await _enqueue_prompt(callback.message.chat.id, raw, jobs, callback.message.message_id)

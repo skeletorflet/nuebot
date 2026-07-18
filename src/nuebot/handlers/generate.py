@@ -66,21 +66,10 @@ async def cmd_status(message: Message, jobs: JobManager) -> None:
     await message.answer("\n".join(parts))
 
 
-@router.message()
-async def free_text_to_prompt(message: Message, jobs: JobManager) -> None:
-    if not _is_authorized(message.from_user.id):  # type: ignore[union-attr]
-        return
-    text = (message.text or "").strip()
-    if not text:
-        return
-    if text.startswith("/"):
-        # Comando no matcheado por ningún router — silencio.
-        return
-    if len(text.split()) < 3:
-        await message.answer("Mandame un prompt de al menos 3 palabras.")
-        return
-
-    text = expand_resource_tokens(text)
+async def _enqueue_prompt(chat_id: int, raw: str, jobs: JobManager, user_message_id: int) -> Job:
+    text = expand_resource_tokens(raw.strip())
+    if not text or len(text.split()) < 3:
+        raise ValueError("prompt demasiado corto")
     generation = load_generation_settings().txt2img
     params = JobParams(
         prompt=text,
@@ -94,13 +83,30 @@ async def free_text_to_prompt(message: Message, jobs: JobManager) -> None:
         seed=generation.seed,
         kind="txt2img",
     )
-
     task_id = new_task_id()
     job = Job(
         task_id=task_id,
-        chat_id=message.chat.id,
+        chat_id=chat_id,
         prompt=text,
         params=params,
+        user_message_id=user_message_id,
+        raw_prompt=raw.strip(),
     )
-    pos = jobs.enqueue(job)
-    # Sin mensaje intermedio: el único mensaje nuevo será el resultado.
+    jobs.enqueue(job)
+    return job
+
+
+@router.message()
+async def free_text_to_prompt(message: Message, jobs: JobManager) -> None:
+    if not _is_authorized(message.from_user.id):  # type: ignore[union-attr]
+        return
+    raw = (message.text or "").strip()
+    if not raw or raw.startswith("/"):
+        return
+    if len(raw.split()) < 3:
+        await message.answer("Mandame un prompt de al menos 3 palabras.")
+        return
+    try:
+        await _enqueue_prompt(message.chat.id, raw, jobs, message.message_id)
+    except ValueError:
+        await message.answer("Mandame un prompt de al menos 3 palabras.")
