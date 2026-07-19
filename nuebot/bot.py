@@ -43,6 +43,7 @@ async def _handle_job(job: Job, bot: Bot, sd: SDClient, jobs: JobManager) -> Non
     try:
         from .sd.client import build_txt2img_payload
         generation = load_generation_settings()
+        await sd.post_options(generation.post_options)
         payload = build_txt2img_payload(
             prompt=params.prompt,
             negative_prompt=params.negative_prompt,

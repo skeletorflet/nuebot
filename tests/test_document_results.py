@@ -7,6 +7,7 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
 
+import httpx
 from nuebot.bot import _handle_job
 from nuebot.handlers.buttons import format_caption, parse_params_from_caption
 from nuebot.jobs.manager import Job, JobManager, JobParams, apply_result_info
@@ -109,6 +110,70 @@ class DocumentResultTests(unittest.TestCase):
             )
 
 
+class PostOptionsTests(unittest.IsolatedAsyncioTestCase):
+    async def test_post_options_is_idempotent_per_payload(self):
+        client = SDClient.__new__(SDClient)
+        client._client = SimpleNamespace()
+        client._post_options_signature = None
+        calls: list[dict] = []
+
+        async def fake_post(url, *, json, timeout=None):  # noqa: ARG001
+            calls.append(json)
+            return SimpleNamespace(status_code=200)
+
+        client._client.post = fake_post
+        payload = {"forge_preset": "anima", "forge_additional_modules": ["a", "b"]}
+        await client.post_options(payload)
+        await client.post_options(payload)
+        await client.post_options(dict(payload))  # mismas claves, otro dict
+        self.assertEqual(len(calls), 1)
+
+    async def test_post_options_reposts_when_payload_changes(self):
+        client = SDClient.__new__(SDClient)
+        client._client = SimpleNamespace()
+        client._post_options_signature = None
+        calls: list[dict] = []
+
+        async def fake_post(url, *, json, timeout=None):  # noqa: ARG001
+            calls.append(json)
+            return SimpleNamespace(status_code=200)
+
+        client._client.post = fake_post
+        await client.post_options({"forge_preset": "anima"})
+        await client.post_options({"forge_preset": "krea2"})
+        self.assertEqual(calls, [{"forge_preset": "anima"}, {"forge_preset": "krea2"}])
+
+    async def test_post_options_skips_request_when_payload_is_empty(self):
+        client = SDClient.__new__(SDClient)
+        client._client = SimpleNamespace()
+        client._post_options_signature = ("prev",)
+        calls: list[dict] = []
+
+        async def fake_post(url, *, json, timeout=None):  # noqa: ARG001
+            calls.append(json)
+            return SimpleNamespace(status_code=200)
+
+        client._client.post = fake_post
+        await client.post_options(None)
+        await client.post_options({})
+        self.assertEqual(calls, [])
+        self.assertIsNone(client._post_options_signature)
+
+    async def test_post_options_swallows_transport_errors(self):
+        client = SDClient.__new__(SDClient)
+        client._client = SimpleNamespace()
+        client._post_options_signature = None
+
+        async def fake_post(url, *, json, timeout=None):  # noqa: ARG001
+            raise httpx.ConnectError("boom")
+
+        client._client.post = fake_post
+        # No debe tirar: si el SD está caído, la generación sigue igual con
+        # el último preset activo.
+        await client.post_options({"forge_preset": "anima"})
+        self.assertIsNone(client._post_options_signature)
+
+
 class MultipleDocumentResultTests(unittest.IsolatedAsyncioTestCase):
     async def test_each_image_uses_its_matching_prompt_and_seed(self):
         info = {
@@ -125,6 +190,9 @@ class MultipleDocumentResultTests(unittest.IsolatedAsyncioTestCase):
         class FakeSD:
             async def txt2img(self, payload, *, payload_init=None):
                 return Txt2ImgResult(["aW1hZ2U="] * 4, info)
+
+            async def post_options(self, payload):
+                return None
 
         class FakeBot:
             def __init__(self):
@@ -147,7 +215,10 @@ class MultipleDocumentResultTests(unittest.IsolatedAsyncioTestCase):
         job = Job(task_id="firstimg", chat_id=1, prompt=params.prompt, params=params)
         bot = FakeBot()
 
-        generation = SimpleNamespace(txt2img=SimpleNamespace(model_dump=lambda: {}))
+        generation = SimpleNamespace(
+            txt2img=SimpleNamespace(model_dump=lambda: {}),
+            post_options=None,
+        )
         with (
             tempfile.TemporaryDirectory() as tmp,
             patch("nuebot.bot.DATA_DIR", Path(tmp)),

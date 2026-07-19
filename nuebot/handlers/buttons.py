@@ -198,6 +198,7 @@ async def _run_txt2img(
         status_id = await _send_status(bot, chat_id, status_label, reply_to)
     try:
         generation = load_generation_settings()
+        await sd.post_options(generation.post_options)
         hr_block = build_hr_block(steps=params.steps, settings=generation) if with_hr else None
         payload = build_txt2img_payload(
             prompt=params.prompt,
@@ -292,6 +293,8 @@ async def on_final(callback: CallbackQuery, callback_data: FinalUpscale,
         # Re-generamos con los mismos params en txt2img normal (rápido) y después
         # le pasamos la imagen al upscaler extra. Es la única forma de tener un
         # b64 base sin pedirle al usuario que la resubmita.
+        generation = load_generation_settings()
+        await sd.post_options(generation.post_options)
         payload = build_txt2img_payload(
             prompt=params.prompt,
             negative_prompt=params.negative_prompt,

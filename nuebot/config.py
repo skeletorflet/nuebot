@@ -37,6 +37,11 @@ class GenerationSettings(BaseModel):
     txt2img: GenerationBlock
     hr: dict[str, Any]
     final_upscale: dict[str, Any]
+    # Opcional. Si existe, el cliente SD hace POST /sdapi/v1/options antes de
+    # cada generación. Útil para forzar el preset de Forge y los módulos
+    # adicionales (VAE, text encoder, etc.) y garantizar que coincidan con el
+    # preset activo.
+    post_options: dict[str, Any] | None = None
 
 
 _settings: GenerationSettings | None = None

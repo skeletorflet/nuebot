@@ -4,6 +4,7 @@ Cubre lo único que usa el bot:
   - POST /sdapi/v1/txt2img           (con o sin enable_hr)
   - POST /sdapi/v1/extra-single-image (Upscale Final)
   - POST /sdapi/v1/interrupt          (cancelar job en GPU)
+  - POST /sdapi/v1/options            (aplica preset antes de generar)
   - GET  /sdapi/v1/options            (health)
 
 Notas de quirks del WebUI (jul 2026):
@@ -15,6 +16,7 @@ Notas de quirks del WebUI (jul 2026):
 from __future__ import annotations
 
 import json
+import logging
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -32,6 +34,20 @@ class Txt2ImgResult:
     info_json: dict[str, Any]
 
 
+_log = logging.getLogger("nuebot.sd")
+
+
+def _stable_signature(payload: dict[str, Any]) -> tuple:
+    """Hash estructural estable: tolera reordenamiento de claves del JSON."""
+    def normalize(value: Any) -> Any:
+        if isinstance(value, dict):
+            return tuple(sorted((k, normalize(v)) for k, v in value.items()))
+        if isinstance(value, list):
+            return tuple(normalize(v) for v in value)
+        return value
+    return normalize(payload)
+
+
 class SDClient:
     def __init__(self, base_url: str, timeout_s: float, debug_dir: str | Path = "debug") -> None:
         self._base = base_url.rstrip("/")
@@ -41,6 +57,10 @@ class SDClient:
             timeout=httpx.Timeout(timeout_s, connect=30.0),
             headers={"Accept": "application/json"},
         )
+        # ponytail: cache por hash estructural. Evita re-POST cuando el preset
+        # activo ya coincide con el último aplicado, incluso si reordenamos
+        # las claves del dict entre runs.
+        self._post_options_signature: tuple | None = None
 
     async def aclose(self) -> None:
         await self._client.aclose()
@@ -60,6 +80,26 @@ class SDClient:
             return r.json()
         except ValueError as e:
             raise SDError(f"GET /options no devolvió JSON ({r.headers.get('content-type')}): {e}") from e
+
+    async def post_options(self, payload: dict[str, Any] | None) -> None:
+        """POST /sdapi/v1/options. Aplica el preset antes de cada generación.
+
+        Idempotente: si el mismo payload ya se posteó, no repite el request.
+        No fatal: si el endpoint no responde, loguea y sigue (la generación
+        usa el último preset activo del SD).
+        """
+        if not payload:
+            self._post_options_signature = None
+            return
+        signature = _stable_signature(payload)
+        if signature == self._post_options_signature:
+            return
+        try:
+            await self._client.post("/sdapi/v1/options", json=payload, timeout=30.0)
+            self._post_options_signature = signature
+            _log.info("SD POST /options aplicado: %s", list(payload.keys()))
+        except httpx.HTTPError as e:
+            _log.warning("No pude aplicar POST /options (%s). Sigo con el preset actual.", e)
 
     async def txt2img(
         self,

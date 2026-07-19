@@ -12,10 +12,7 @@
     "n_iter": 1,
     "save_images": false,
     "send_images": true,
-    "do_not_save_grid": true,
-    "override_settings": {
-      "shift": 3
-    }
+    "do_not_save_grid": true
   },
   "hr": {
     "hr_upscaler": "4x_NMKD-Superscale-SP_178000_G",
@@ -34,5 +31,12 @@
     "upscaling_resize": 3.0,
     "upscaling_crop": false,
     "upscaling_safer": false
+  },
+  "post_options": {
+    "forge_preset": "anima",
+    "forge_additional_modules": [
+      "/kaggle/working/Forge-Neo/models/VAE/anima_qwen_image_vae.safetensors",
+      "/kaggle/working/Forge-Neo/models/text_encoder/qwen_3_06b_base.safetensors"
+    ]
   }
 }
