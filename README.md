@@ -7,14 +7,16 @@ metadata del screenshot y botones **✨ UPSCALE** / **🔄 REPETIR**.
 ## Setup
 
 ```bash
-# 1) editar .env (copiá .env.example primero)
-cp .env.example .env
-#    - BOT_TOKEN de @BotFather
-#    - SD_API_URL del WebUI (default http://127.0.0.1:7860)
+# 1) configurá la URL del WebUI en settings.json
+# 2) guardá los parámetros del modelo en presets/anima.json
 
-# 2) correr
-uv run python start_bot.py
+# 3) correr con el token de @BotFather y el preset
+uv run python start_bot.py BOT_TOKEN --preset anima
 ```
+
+Cada `presets/<nombre>.json` define `txt2img`, `hr` y `final_upscale`.
+Para sumar un modelo, agregá el JSON y usá `--preset <nombre>`; sin ese
+argumento el bot sigue usando los bloques de generación de `settings.json`.
 
 ## Uso
 
@@ -26,7 +28,7 @@ uv run python start_bot.py
 
 Botones sobre cada documento:
 - **🔄 REPETIR** — vuelve a generar usando el snapshot exacto guardado.
-- **✨ UPSCALE** — re-genera con `enable_hr=true` (upscaler del `.env`, x1.5).
+- **✨ UPSCALE** — re-genera con `enable_hr=true` usando el bloque `hr` del preset.
 - **✨ UPSCALE FINAL** — aplica `/extra-single-image` x3 al resultado HR.
 
 Los parámetros completos de cada job se guardan en `data/jobs/<task_id>.json`.
@@ -43,7 +45,7 @@ Esto permite que Repetir y Upscale sigan funcionando después de reiniciar el bo
 
 ## Lo que NO hace (a propósito)
 
-Sin DB, sin persistencia entre reinicios, sin presets por modelo, sin panel
+Sin DB, sin panel
 admin, sin `/imagine`, sin wizards. Para uso personal eso es exactamente lo
 que necesitás; cuando agregues un segundo modelo o un segundo usuario, el
 plan en `.hermes/PLAN.md` tiene la lista de cosas a sumar.

@@ -1,10 +1,13 @@
 from __future__ import annotations
 
 import json
+import os
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
+from nuebot import config
 from nuebot.config import load_generation_settings
 from nuebot.sd.client import build_extra_payload, build_hr_block, build_txt2img_payload
 
@@ -69,6 +72,33 @@ class GenerationSettingsTests(unittest.TestCase):
         self.assertEqual((payload["width"], payload["height"]), (640, 768))
         self.assertEqual(build_hr_block(steps=9, settings=settings)["hr_second_pass_steps"], 4)
         self.assertEqual(build_extra_payload(image_b64="png", settings=settings)["upscaling_resize"], 3.0)
+
+    def test_named_preset_is_loaded_from_presets_directory(self):
+        base = json.loads(Path("settings.json").read_text(encoding="utf-8"))
+        preset = {
+            key: json.loads(json.dumps(base[key]))
+            for key in ("txt2img", "hr", "final_upscale")
+        }
+        preset["txt2img"]["width"] = 704
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "presets").mkdir()
+            (root / "settings.json").write_text(json.dumps(base), encoding="utf-8")
+            (root / "presets" / "krea2.json").write_text(json.dumps(preset), encoding="utf-8")
+            old_settings = config._settings
+            config._settings = None
+            try:
+                with (
+                    patch("nuebot.config.ROOT", root),
+                    patch.dict(os.environ, {"NUEBOT_PRESET": "krea2"}),
+                ):
+                    loaded = load_generation_settings()
+            finally:
+                config._settings = old_settings
+
+        self.assertEqual(loaded.txt2img.width, 704)
+        self.assertEqual(loaded.hr["hr_scale"], 1.25)
 
 
 if __name__ == "__main__":

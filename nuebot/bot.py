@@ -117,6 +117,7 @@ async def main() -> None:
         level=logging.INFO,
         format="%(asctime)s %(levelname)s %(name)s: %(message)s",
     )
+    load_generation_settings()  # valida/carga --preset antes de abrir conexiones
     s = get_settings().bot
     sd = SDClient(s.sd_api_url, s.sd_timeout_s, ROOT / "debug")
     # Health check rápido (no fatal: SD puede estar arrancando)

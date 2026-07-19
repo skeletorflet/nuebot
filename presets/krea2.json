@@ -1,10 +1,4 @@
 {
-  "bot": {
-    "sd_api_url": "https://68753625b99de1e093.gradio.live",
-    "sd_fallback_api_url": "http://127.0.0.1:7860",
-    "sd_timeout_s": 600,
-    "allowed_user_id": null
-  },
   "txt2img": {
     "negative_prompt": "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry",
     "width": 832,

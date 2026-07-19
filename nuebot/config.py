@@ -1,6 +1,9 @@
 """Config tipada desde settings.json. Validación en arranque."""
 from __future__ import annotations
 
+import json
+import os
+import re
 from pathlib import Path
 from typing import Any
 
@@ -37,18 +40,71 @@ class GenerationSettings(BaseModel):
 
 
 _settings: GenerationSettings | None = None
+_PRESET_FIELDS = {
+    "txt2img": {
+        "negative_prompt", "width", "height", "steps", "cfg_scale",
+        "sampler_name", "scheduler", "seed", "batch_size", "n_iter",
+        "save_images", "send_images", "do_not_save_grid",
+    },
+    "hr": {
+        "hr_upscaler", "hr_scale", "hr_second_pass_ratio",
+        "denoising_strength", "hr_additional_modules",
+    },
+    "final_upscale": {
+        "upscaler_1", "upscaler_2", "extras_upscaler_2_visibility",
+        "upscale_first", "resize_mode", "show_extras_results",
+        "upscaling_resize", "upscaling_crop", "upscaling_safer",
+    },
+}
 
 
-def get_settings(path: Path = ROOT / "settings.json") -> GenerationSettings:
+def _read_settings(path: Path) -> GenerationSettings:
+    if not path.exists():
+        raise SystemExit(f"No existe {path}.")
+    try:
+        return GenerationSettings.model_validate_json(path.read_text(encoding="utf-8"))
+    except ValueError as exc:
+        raise SystemExit(f"Configuración inválida en {path}: {exc}") from exc
+
+
+def get_settings(path: Path | None = None) -> GenerationSettings:
     global _settings
     if _settings is None:
-        if not path.exists():
-            raise SystemExit(
-                f"No existe {path}. Copiá la plantilla de settings.json antes de arrancar el bot."
-            )
-        _settings = GenerationSettings.model_validate_json(path.read_text(encoding="utf-8"))
+        _settings = _read_settings(path or ROOT / "settings.json")
     return _settings
 
 
-def load_generation_settings(path: Path = ROOT / "settings.json") -> GenerationSettings:
-    return get_settings(path)
+def load_generation_settings(path: Path | None = None) -> GenerationSettings:
+    if path is not None:
+        return _read_settings(path)
+
+    name = os.environ.get("NUEBOT_PRESET")
+    if not name:
+        return get_settings()
+    if not re.fullmatch(r"[A-Za-z0-9_-]+", name):
+        raise SystemExit(f"Nombre de preset inválido: {name!r}")
+
+    preset_path = ROOT / "presets" / f"{name}.json"
+    if not preset_path.exists():
+        raise SystemExit(f"No existe el preset {name!r}: {preset_path}")
+    try:
+        raw = json.loads(preset_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise SystemExit(f"Preset inválido en {preset_path}: {exc}") from exc
+
+    missing = ["objeto JSON raíz"] if not isinstance(raw, dict) else [
+        f"{block}.{field}"
+        for block, fields in _PRESET_FIELDS.items()
+        for field in sorted(
+            fields - set(raw.get(block, {}))
+            if isinstance(raw.get(block), dict) else fields
+        )
+    ]
+    if missing:
+        raise SystemExit(f"Preset incompleto {name!r}; falta: {', '.join(missing)}")
+
+    raw["bot"] = get_settings().bot.model_dump()
+    try:
+        return GenerationSettings.model_validate(raw)
+    except ValueError as exc:
+        raise SystemExit(f"Preset inválido en {preset_path}: {exc}") from exc
