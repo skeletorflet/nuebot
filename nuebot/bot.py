@@ -21,7 +21,7 @@ from .handlers.buttons import Retry
 from .jobs.manager import Job, JobManager, apply_result_info
 from .sd.client import SDClient
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "data" / "outputs"
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 

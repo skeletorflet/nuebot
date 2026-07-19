@@ -17,7 +17,7 @@ from ..config import get_settings, load_generation_settings
 from ..jobs.manager import Job, JobManager, JobParams, new_task_id
 
 router = Router(name="generate")
-RESOURCES_DIR = Path(__file__).resolve().parents[3] / "resources"
+RESOURCES_DIR = Path(__file__).resolve().parents[2] / "resources"
 
 
 def expand_resource_tokens(prompt: str, resources_dir: Path = RESOURCES_DIR) -> str:
