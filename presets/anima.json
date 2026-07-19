@@ -9,7 +9,7 @@
     "scheduler": "Simple",
     "seed": -1,
     "batch_size": 1,
-    "n_iter": 1,
+    "n_iter": 4,
     "save_images": false,
     "send_images": true,
     "do_not_save_grid": true
