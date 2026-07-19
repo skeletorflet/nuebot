@@ -29,7 +29,7 @@ def expand_resource_tokens(prompt: str, resources_dir: Path = RESOURCES_DIR) -> 
             line.strip() for line in path.read_text(encoding="utf-8").splitlines() if line.strip()
         ))
         if lines:
-            options = "{" + "|".join(random.sample(lines, min(4, len(lines)))) + "}"
+            options = "{" + "|".join(random.sample(lines, min(12, len(lines)))) + "}"
             prompt = re.sub(rf"(?<!\w){re.escape(path.stem)}(?!\w)", lambda _: options, prompt)
     return prompt
 
