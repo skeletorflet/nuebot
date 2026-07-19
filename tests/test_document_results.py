@@ -4,10 +4,13 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
+from unittest.mock import patch
 
+from nuebot.bot import _handle_job
 from nuebot.handlers.buttons import format_caption, parse_params_from_caption
-from nuebot.jobs.manager import JobManager, JobParams, apply_result_info
-from nuebot.sd.client import SDClient
+from nuebot.jobs.manager import Job, JobManager, JobParams, apply_result_info
+from nuebot.sd.client import SDClient, Txt2ImgResult
 
 
 class DocumentResultTests(unittest.TestCase):
@@ -104,6 +107,61 @@ class DocumentResultTests(unittest.TestCase):
                 json.loads((debug / "resultado.json").read_text(encoding="utf-8"))["info"],
                 "real seed 2418682888",
             )
+
+
+class MultipleDocumentResultTests(unittest.IsolatedAsyncioTestCase):
+    async def test_each_image_uses_its_matching_prompt_and_seed(self):
+        info = {
+            "prompt": "prompt 0",
+            "all_prompts": [f"prompt {i}" for i in range(4)],
+            "negative_prompt": "negative 0",
+            "all_negative_prompts": [f"negative {i}" for i in range(4)],
+            "seed": 100,
+            "all_seeds": [100 + i for i in range(4)],
+            "width": 832,
+            "height": 1216,
+        }
+
+        class FakeSD:
+            async def txt2img(self, payload, *, payload_init=None):
+                return Txt2ImgResult(["aW1hZ2U="] * 4, info)
+
+        class FakeBot:
+            def __init__(self):
+                self.documents = []
+
+            async def send_message(self, *args, **kwargs):
+                return SimpleNamespace(message_id=1)
+
+            async def send_document(self, *args, **kwargs):
+                self.documents.append(kwargs)
+
+            async def delete_message(self, *args, **kwargs):
+                pass
+
+        params = JobParams(
+            prompt="payload prompt", negative_prompt="payload negative",
+            width=832, height=1216, steps=8, cfg_scale=1,
+            sampler="Euler a", scheduler="Simple", seed=-1,
+        )
+        job = Job(task_id="firstimg", chat_id=1, prompt=params.prompt, params=params)
+        bot = FakeBot()
+
+        generation = SimpleNamespace(txt2img=SimpleNamespace(model_dump=lambda: {}))
+        with (
+            tempfile.TemporaryDirectory() as tmp,
+            patch("nuebot.bot.DATA_DIR", Path(tmp)),
+            patch("nuebot.bot.load_generation_settings", return_value=generation),
+        ):
+            jobs = JobManager(cache_dir=Path(tmp) / "jobs")
+            await _handle_job(job, bot, FakeSD(), jobs)
+
+            self.assertEqual(len(bot.documents), 4)
+            for index, sent in enumerate(bot.documents):
+                self.assertIn(f"prompt {index}", sent["caption"])
+                self.assertIn(f"• Seed: {100 + index}", sent["caption"])
+                task_id = sent["reply_markup"].inline_keyboard[0][0].callback_data.split(":", 1)[1]
+                self.assertEqual(jobs.get_params(task_id).negative_prompt, f"negative {index}")
 
 
 if __name__ == "__main__":

@@ -66,13 +66,18 @@ def _info_scheduler(info: dict[str, Any]) -> Any:
     return None
 
 
-def apply_result_info(params: JobParams, info: dict[str, Any] | None) -> JobParams:
+def _result_item(info: dict[str, Any], index: int, plural: str, singular: str) -> Any:
+    values = info.get(plural)
+    if isinstance(values, list) and index < len(values):
+        return values[index]
+    return info.get(singular)
+
+
+def apply_result_info(params: JobParams, info: dict[str, Any] | None, index: int = 0) -> JobParams:
     """Usa INFO como fuente de verdad para caption y acciones posteriores."""
     if not info:
         return params
-    seed = _result_value(info, "seed", "all_seeds")
-    if isinstance(seed, list):
-        seed = seed[0] if seed else None
+    seed = _result_item(info, index, "all_seeds", "seed")
     width = _result_value(info, "width", "W")
     height = _result_value(info, "height", "H")
     steps = _result_value(info, "steps", "steps_count", "sampling_steps")
@@ -96,10 +101,11 @@ def apply_result_info(params: JobParams, info: dict[str, Any] | None) -> JobPara
         updates["sampler"] = str(sampler)
     if scheduler is not None:
         updates["scheduler"] = str(scheduler)
-    for name, aliases in (("prompt", ("prompt", "all_prompts")), ("negative_prompt", ("negative_prompt", "all_negative_prompts"))):
-        value = _result_value(info, *aliases)
-        if isinstance(value, list):
-            value = value[0] if value else None
+    for name, plural, singular in (
+        ("prompt", "all_prompts", "prompt"),
+        ("negative_prompt", "all_negative_prompts", "negative_prompt"),
+    ):
+        value = _result_item(info, index, plural, singular)
         if isinstance(value, str):
             updates[name] = value
     if width is not None:

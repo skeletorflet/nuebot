@@ -18,7 +18,7 @@ from aiogram.client.default import DefaultBotProperties
 from .config import get_settings, load_generation_settings
 from .handlers import buttons, cancel, generate
 from .handlers.buttons import Retry
-from .jobs.manager import Job, JobManager, apply_result_info
+from .jobs.manager import Job, JobManager, apply_result_info, new_task_id
 from .sd.client import SDClient
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -56,21 +56,23 @@ async def _handle_job(job: Job, bot: Bot, sd: SDClient, jobs: JobManager) -> Non
             settings=generation,
         )
         result = await sd.txt2img(payload, payload_init=payload)
-        img_b64 = result.images_b64[0]
-        png = base64.b64decode(img_b64)
-        (DATA_DIR / f"{job.task_id}_txt2img.png").write_bytes(png)
-
-        result_params = apply_result_info(params, result.info_json)
-        jobs.remember(job.task_id, result_params)
-
         from aiogram.types import BufferedInputFile
-        document = BufferedInputFile(png, filename=f"{job.task_id}_txt2img.png")
-        await bot.send_document(
-            job.chat_id,
-            document=document,
-            caption=buttons.format_caption(job.task_id, "txt2img", result_params),
-            reply_markup=buttons.kb_txt2img(job.task_id),
-        )
+        for index, img_b64 in enumerate(result.images_b64):
+            result_id = job.task_id if index == 0 else new_task_id()
+            png = base64.b64decode(img_b64)
+            filename = f"{result_id}_txt2img.png"
+            (DATA_DIR / filename).write_bytes(png)
+
+            result_params = apply_result_info(params, result.info_json, index)
+            jobs.remember(result_id, result_params)
+
+            document = BufferedInputFile(png, filename=filename)
+            await bot.send_document(
+                job.chat_id,
+                document=document,
+                caption=buttons.format_caption(result_id, "txt2img", result_params),
+                reply_markup=buttons.kb_txt2img(result_id),
+            )
 
     # asyncio.CancelledError debe propagarse para que el manager marque el future
     # como cancelado; cualquier otro error deja el status visible y le avisa al
