@@ -117,7 +117,7 @@ class PostOptionsTests(unittest.IsolatedAsyncioTestCase):
         client._post_options_signature = None
         calls: list[dict] = []
 
-        async def fake_post(url, *, json, timeout=None):  # noqa: ARG001
+        async def fake_post(url, *, json, timeout=None, **kwargs):  # noqa: ARG001
             calls.append(json)
             return SimpleNamespace(status_code=200)
 
@@ -134,7 +134,7 @@ class PostOptionsTests(unittest.IsolatedAsyncioTestCase):
         client._post_options_signature = None
         calls: list[dict] = []
 
-        async def fake_post(url, *, json, timeout=None):  # noqa: ARG001
+        async def fake_post(url, *, json, timeout=None, **kwargs):  # noqa: ARG001
             calls.append(json)
             return SimpleNamespace(status_code=200)
 
@@ -149,7 +149,7 @@ class PostOptionsTests(unittest.IsolatedAsyncioTestCase):
         client._post_options_signature = ("prev",)
         calls: list[dict] = []
 
-        async def fake_post(url, *, json, timeout=None):  # noqa: ARG001
+        async def fake_post(url, *, json, timeout=None, **kwargs):  # noqa: ARG001
             calls.append(json)
             return SimpleNamespace(status_code=200)
 
@@ -164,14 +164,45 @@ class PostOptionsTests(unittest.IsolatedAsyncioTestCase):
         client._client = SimpleNamespace()
         client._post_options_signature = None
 
-        async def fake_post(url, *, json, timeout=None):  # noqa: ARG001
+        async def boom(url, *, json, timeout=None, **kwargs):  # noqa: ARG001
             raise httpx.ConnectError("boom")
 
-        client._client.post = fake_post
+        client._client.post = boom
         # No debe tirar: si el SD está caído, la generación sigue igual con
         # el último preset activo.
         await client.post_options({"forge_preset": "anima"})
         self.assertIsNone(client._post_options_signature)
+
+    async def test_post_options_retries_on_first_failure(self):
+        client = SDClient.__new__(SDClient)
+        client._client = SimpleNamespace()
+        client._post_options_signature = None
+        calls = {"n": 0}
+
+        async def flaky(url, *, json, timeout=None, **kwargs):  # noqa: ARG001
+            calls["n"] += 1
+            if calls["n"] == 1:
+                raise httpx.RemoteProtocolError("Server disconnected")
+            return SimpleNamespace(status_code=200)
+
+        client._client.post = flaky
+        await client.post_options({"forge_preset": "anima"})
+        self.assertEqual(calls["n"], 2)
+        self.assertIsNotNone(client._post_options_signature)
+
+    async def test_post_options_sends_connection_close_header(self):
+        client = SDClient.__new__(SDClient)
+        client._client = SimpleNamespace()
+        client._post_options_signature = None
+        captured: dict = {}
+
+        async def capture(url, *, json, timeout=None, headers=None, **kwargs):  # noqa: ARG001
+            captured["headers"] = headers
+            return SimpleNamespace(status_code=200)
+
+        client._client.post = capture
+        await client.post_options({"forge_preset": "anima"})
+        self.assertEqual(captured["headers"], {"Connection": "close"})
 
 
 class MultipleDocumentResultTests(unittest.IsolatedAsyncioTestCase):

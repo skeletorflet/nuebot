@@ -87,6 +87,11 @@ class SDClient:
         Idempotente: si el mismo payload ya se posteó, no repite el request.
         No fatal: si el endpoint no responde, loguea y sigue (la generación
         usa el último preset activo del SD).
+
+        Envía `Connection: close` para forzar socket nuevo: los tunnels
+        públicos (pinggy, gradio.live) cierran conexiones idle y los reusos
+        caen con "Server disconnected without sending a response". El costo
+        de un connect extra es despreciable vs. una generación de 30-60s.
         """
         if not payload:
             self._post_options_signature = None
@@ -94,12 +99,20 @@ class SDClient:
         signature = _stable_signature(payload)
         if signature == self._post_options_signature:
             return
-        try:
-            await self._client.post("/sdapi/v1/options", json=payload, timeout=30.0)
-            self._post_options_signature = signature
-            _log.info("SD POST /options aplicado: %s", list(payload.keys()))
-        except httpx.HTTPError as e:
-            _log.warning("No pude aplicar POST /options (%s). Sigo con el preset actual.", e)
+        for attempt in (1, 2):
+            try:
+                await self._client.post(
+                    "/sdapi/v1/options",
+                    json=payload,
+                    timeout=30.0,
+                    headers={"Connection": "close"},
+                )
+                self._post_options_signature = signature
+                _log.info("SD POST /options aplicado: %s", list(payload.keys()))
+                return
+            except httpx.HTTPError as e:
+                _log.warning("POST /options intento %d falló (%s).", attempt, e)
+        _log.warning("No pude aplicar POST /options tras 2 intentos. Sigo con el preset actual.")
 
     async def txt2img(
         self,
