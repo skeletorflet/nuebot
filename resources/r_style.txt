@@ -1,80 +1,130 @@
-Studio Ghibli animation style, lush backgrounds, hand-drawn, soft lighting
+Studio Ghibli animation style, lush backgrounds, hand-drawn, soft lighting, carefully rendered with texture lighting material and compositional detail
 Cyberpunk synthwave, neon pink and blue, grid lines, 80s retro
-Dark fantasy illustration, grimdark, gothic, high contrast shadows
-Art Nouveau, Alphonse Mucha style, flowing lines, floral motifs
-Steampunk concept art, brass and copper, gears, Victorian aesthetic
-Watercolor painting, soft washes, bleeding colors, paper texture
-Low poly 3D render, flat shading, geometric, vibrant colors
-Oil painting, Baroque style, dramatic lighting, rich textures
-Manga black and white, screentones, dynamic action lines, ink
-Pixel art, 16-bit retro, limited color palette, crisp pixels
-Impressionism, visible brush strokes, plein air, Claude Monet style
-Surrealism, Salvador Dali style, melting objects, dreamlike
+Dark fantasy illustration, grimdark, gothic, high contrast shadows, carefully rendered with texture lighting material and compositional detail
+Art Nouveau, Alphonse Mucha style, flowing lines, floral motifs, carefully rendered with texture lighting material and compositional detail
+Steampunk concept art, brass and copper, gears, Victorian aesthetic, carefully rendered with texture lighting material and compositional detail
+Watercolor painting, soft washes, bleeding colors, paper texture, carefully rendered with texture lighting material and compositional detail
+Low poly 3D render, flat shading, geometric, vibrant colors, carefully rendered with texture lighting material and compositional detail
+Oil painting, Baroque style, dramatic lighting, rich textures, carefully rendered with texture lighting material and compositional detail
+Manga black and white, screentones, dynamic action lines, ink, carefully rendered with texture lighting material and compositional detail
+Pixel art, 16-bit retro, limited color palette, crisp pixels, carefully rendered with texture lighting material and compositional detail
+Impressionism, visible brush strokes, plein air, Claude Monet style, carefully rendered with texture lighting material and compositional detail
+Surrealism, Salvador Dali style, melting objects, dreamlike, carefully rendered with texture lighting material and compositional detail
 Pop art, Andy Warhol style, bright colors, halftone dots, comic
-Ukiyo-e, Japanese woodblock print, Hokusai style, flat colors
-Minimalist illustration, simple shapes, negative space, vector art
-Gothic architecture drawing, intricate stonework, dark, gloomy
+Ukiyo-e, Japanese woodblock print, Hokusai style, flat colors, carefully rendered with texture lighting material and compositional detail
+Minimalist illustration, simple shapes, negative space, vector art, carefully rendered with texture lighting material and compositional detail
+Gothic architecture drawing, intricate stonework, dark, gloomy, carefully rendered with texture lighting material and compositional detail
 Comic book art, Marvel style, bold outlines, dynamic poses, cel shading
-Vaporwave aesthetic, Roman statues, pastel colors, palm trees
-Photorealistic, 8k resolution, highly detailed, ray tracing, raw photo
-Fantasy map illustration, cartography, parchment texture, ink and watercolor
-Chibi style, oversized heads, small bodies, cute, kawaii
+Vaporwave aesthetic, Roman statues, pastel colors, palm trees, carefully rendered with texture lighting material and compositional detail
+Photorealistic, 8k resolution, highly detailed, ray tracing, raw photo, carefully rendered with texture lighting material and compositional detail
+Fantasy map illustration, cartography, parchment texture, ink and watercolor, carefully rendered with texture lighting material and compositional detail
+Chibi style, oversized heads, small bodies, cute, kawaii, carefully rendered with texture lighting material and compositional detail
 Gothic horror illustration, dark, eerie, zombie, monster, pen and ink
-Retro 1950s advertisement, vintage colors, kitsch, halftone
-Abstract expressionism, Jackson Pollock style, drip painting, chaotic
-Realistic charcoal drawing, smudged shadows, rough textures, portrait
-Giger, alien, flesh and machine
-Art Deco, geometric shapes, gold and black, 1920s elegance
-Pastel goth, pink and black, cute skulls, occult symbols
-Gouache painting, matte finish, vibrant, opaque colors, illustrative
-Cinematic concept art, matte painting, epic scale, dramatic lighting
-Retro anime, 90s aesthetic, cel animation, slightly grainy, VHS
-Isometric 3D illustration, clean lines, miniature diorama look
-Stained glass window art, religious iconography, black outlines, vibrant
-Sketch, pencil drawing, unfinished lines, construction lines, rough
-Origami paper craft, folded textures, hard shadows, solid colors
+Retro 1950s advertisement, vintage colors, kitsch, halftone, carefully rendered with texture lighting material and compositional detail
+Abstract expressionism, Jackson Pollock style, drip painting, chaotic, carefully rendered with texture lighting material and compositional detail
+Realistic charcoal drawing, smudged shadows, rough textures, portrait, carefully rendered with texture lighting material and compositional detail
+Giger, alien, flesh and machine, carefully rendered with texture lighting material and compositional detail
+Art Deco, geometric shapes, gold and black, 1920s elegance, carefully rendered with texture lighting material and compositional detail
+Pastel goth, pink and black, cute skulls, occult symbols, carefully rendered with texture lighting material and compositional detail
+Gouache painting, matte finish, vibrant, opaque colors, illustrative, carefully rendered with texture lighting material and compositional detail
+Cinematic concept art, matte painting, epic scale, dramatic lighting, carefully rendered with texture lighting material and compositional detail
+Retro anime, 90s aesthetic, cel animation, slightly grainy, VHS, carefully rendered with texture lighting material and compositional detail
+Isometric 3D illustration, clean lines, miniature diorama look, carefully rendered with texture lighting material and compositional detail
+Stained glass window art, religious iconography, black outlines, vibrant, carefully rendered with texture lighting material and compositional detail
+Sketch, pencil drawing, unfinished lines, construction lines, rough, carefully rendered with texture lighting material and compositional detail
+Origami paper craft, folded textures, hard shadows, solid colors, carefully rendered with texture lighting material and compositional detail
 Neo-noir film style, high contrast black and white, Venetian blinds shadow
-Zentangle, intricate patterns, doodle art, black and white
-Claymation, stop motion, plasticine textures, Aardman style
-Fantasy realism, Frank Frazetta style, muscular figures, oil paint
-Kawaii pastel illustration, soft pinks, cute animals, sparkles
-Retro futurism, 1950s sci-fi, flying cars, jetpacks, chrome
-Constructivism, Russian propaganda poster, bold red, geometric
-Grunge aesthetic, dirty textures, torn paper, distressed, dark
+Zentangle, intricate patterns, doodle art, black and white, carefully rendered with texture lighting material and compositional detail
+Claymation, stop motion, plasticine textures, Aardman style, carefully rendered with texture lighting material and compositional detail
+Fantasy realism, Frank Frazetta style, muscular figures, oil paint, carefully rendered with texture lighting material and compositional detail
+Kawaii pastel illustration, soft pinks, cute animals, sparkles, carefully rendered with texture lighting material and compositional detail
+Retro futurism, 1950s sci-fi, flying cars, jetpacks, chrome, carefully rendered with texture lighting material and compositional detail
+Constructivism, Russian propaganda poster, bold red, geometric, carefully rendered with texture lighting material and compositional detail
+Grunge aesthetic, dirty textures, torn paper, distressed, dark, carefully rendered with texture lighting material and compositional detail
 Lofi hip-hop aesthetic, cozy room, warm lighting, anime style, relaxed
-Hyperrealism, extremely detailed, photograph-like, macros
-Psychedelic art, 1960s, swirling colors, trippy, distorted
-Sticker art, thick white borders, die-cut, vibrant vector
-Retro 80s anime, Macross style, mecha, detailed mechanics
-Baroque painting, Caravaggio style, chiaroscuro, dramatic, religious
-Flat vector illustration, corporate memphis, abstract proportions, colorful
-Ink wash painting, sumi-e, brush strokes, negative space, traditional
-Vintage botanical illustration, scientific drawing, watercolor, paper texture
-Dark academia aesthetic, dusty books, tweed, candlelight, muted colors
-Y2K aesthetic, chrome, bubble letters, early 2000s, pink
-Cosmic horror, eldritch, tentacles, non-euclidean geometry, dark
-Retro game RPG, 90s JRPG, pixel art background, isometric
-Typography poster, Swiss design, sans-serif, grid layout, bold
-Glitch art, digital distortion, RGB shift, datamosh, VHS tracking
-Paper cutout collage, mixed media, torn edges, vintage magazines
+Hyperrealism, extremely detailed, photograph-like, macros, carefully rendered with texture lighting material and compositional detail
+Psychedelic art, 1960s, swirling colors, trippy, distorted, carefully rendered with texture lighting material and compositional detail
+Sticker art, thick white borders, die-cut, vibrant vector, carefully rendered with texture lighting material and compositional detail
+Retro 80s anime, Macross style, mecha, detailed mechanics, carefully rendered with texture lighting material and compositional detail
+Baroque painting, Caravaggio style, chiaroscuro, dramatic, religious, carefully rendered with texture lighting material and compositional detail
+Flat vector illustration, corporate memphis, abstract proportions, colorful, carefully rendered with texture lighting material and compositional detail
+Ink wash painting, sumi-e, brush strokes, negative space, traditional, carefully rendered with texture lighting material and compositional detail
+Vintage botanical illustration, scientific drawing, watercolor, paper texture, carefully rendered with texture lighting material and compositional detail
+Dark academia aesthetic, dusty books, tweed, candlelight, muted colors, carefully rendered with texture lighting material and compositional detail
+Y2K aesthetic, chrome, bubble letters, early 2000s, pink, carefully rendered with texture lighting material and compositional detail
+Cosmic horror, eldritch, tentacles, non-euclidean geometry, dark, carefully rendered with texture lighting material and compositional detail
+Retro game RPG, 90s JRPG, pixel art background, isometric, carefully rendered with texture lighting material and compositional detail
+Typography poster, Swiss design, sans-serif, grid layout, bold, carefully rendered with texture lighting material and compositional detail
+Glitch art, digital distortion, RGB shift, datamosh, VHS tracking, carefully rendered with texture lighting material and compositional detail
+Paper cutout collage, mixed media, torn edges, vintage magazines, carefully rendered with texture lighting material and compositional detail
 Mural art, street art, graffiti, large scale, urban, spray paint
-Stipple shading, pointillism, dots, ink, high contrast
-Retro travel poster, Art Deco, bold colors, vintage typography
-Expressionism, Edvard Munch style, emotional, distorted, swirling
-Vintage cartoon, 1930s rubber hose animation, black and white
+Stipple shading, pointillism, dots, ink, high contrast, carefully rendered with texture lighting material and compositional detail
+Retro travel poster, Art Deco, bold colors, vintage typography, carefully rendered with texture lighting material and compositional detail
+Expressionism, Edvard Munch style, emotional, distorted, swirling, carefully rendered with texture lighting material and compositional detail
+Vintage cartoon, 1930s rubber hose animation, black and white, carefully rendered with texture lighting material and compositional detail
 3D clay render, soft lighting, pastel colors, cute, Blender 3D
-Xerox punk, photocopy aesthetic, high contrast, gritty, punk flyer
+Xerox punk, photocopy aesthetic, high contrast, gritty, punk flyer, carefully rendered with texture lighting material and compositional detail
 Fantasy card game art, Magic the Gathering style, detailed, border
-Soft pastel drawing, velvety texture, blended colors, dreamy
-Retro kaiju movie poster, Japanese text, tokusatsu, dramatic
-Wireframe 3D, 1980s computer graphics, neon lines, black background
-Tarot card illustration, intricate borders, mystical symbols, Art Nouveau
-Post-apocalyptic wasteland, Mad Max style, dusty, rusted, improvised
-Vintage map, aged parchment, compass rose, sea monsters, ink
-Neon noir, blade runner style, rain, neon reflections, dark
+Soft pastel drawing, velvety texture, blended colors, dreamy, carefully rendered with texture lighting material and compositional detail
+Retro kaiju movie poster, Japanese text, tokusatsu, dramatic, carefully rendered with texture lighting material and compositional detail
+Wireframe 3D, 1980s computer graphics, neon lines, black background, carefully rendered with texture lighting material and compositional detail
+Tarot card illustration, intricate borders, mystical symbols, Art Nouveau, carefully rendered with texture lighting material and compositional detail
+Post-apocalyptic wasteland, Mad Max style, dusty, rusted, improvised, carefully rendered with texture lighting material and compositional detail
+Vintage map, aged parchment, compass rose, sea monsters, ink, carefully rendered with texture lighting material and compositional detail
+Neon noir, blade runner style, rain, neon reflections, dark, carefully rendered with texture lighting material and compositional detail
 Cinematic lighting, film still, anamorphic lens, depth of field, 35mm
-Folk art, naive painting, flat perspective, bright colors, rural
+Folk art, naive painting, flat perspective, bright colors, rural, carefully rendered with texture lighting material and compositional detail
 Gothic pen drawing, Aubrey Beardsley style, black ink, ornate, creepy
-Sci-fi book cover, 1970s paperback, pulp art, spaceships, vivid
-Holographic iridescent, chrome, pastel rainbow reflections, 3D
-Linocut print, block printing, rough textures, high contrast, traditional
+Sci-fi book cover, 1970s paperback, pulp art, spaceships, vivid, carefully rendered with texture lighting material and compositional detail
+Holographic iridescent, chrome, pastel rainbow reflections, 3D, carefully rendered with texture lighting material and compositional detail
+Linocut print, block printing, rough textures, high contrast, traditional, carefully rendered with texture lighting material and compositional detail
+faded Polaroid photograph, washed out colors, vintage 1980s aesthetic, soft vignette, light leak
+Risograph print, layered spot colors, grainy misregistration, indie art zine aesthetic, vibrant
+Cyanotype photographic print, deep Prussian blue monochrome, white botanical silhouettes, sun-printed fabric
+Woodcut medieval print, hand-carved block, bold black lines, illuminated manuscript aesthetic, religious iconography
+Engraving print, fine cross-hatched lines, classical illustration style, copper plate precision
+Bauhaus design, geometric primary colors, sans-serif typography, modernist functional aesthetic
+Memphis design 1980s, squiggle patterns, pastel colors, postmodern playful shapes, geometric chaos
+De Stijl movement, primary colors with black grid, rectangular forms, Mondrian-influenced composition
+Constructivist Russian poster, bold red diagonal, hammer and sickle aesthetic, propaganda art style
+Nouveau Realisme art, assemblage aesthetic, mixed media objects, mid-century avant-garde
+Folk embroidery, traditional cross-stitch patterns, hand-sewn colorful threads, decorative textile art
+Soviet space age propaganda poster, retrofuturism, cosmonaut hero, vivid red and gold
+Atompunk retrofuturism, atomic age optimism, vacuum tubes, ray gun aesthetic, 1950s sci-fi
+Cassette futurism, analog tech aesthetic, magnetic tape, chunky computer terminals, beige plastic
+Afrofuturism art, vibrant patterns, futuristic African diaspora aesthetic, bold colors, cosmic themes
+Solarpunk aesthetic, sustainable green architecture, lush vertical gardens, bright optimistic future
+Biomorphic art, organic curving shapes, natural forms, abstract surrealist painting style, soft colors
+Orphism art movement, colorful abstract circles, dynamic composition, vibrant cubist-derived style
+Precisionism art, sharp geometric industrial forms, American machine age, clean lines, polished metal
+Vorticism art movement, sharp angular machines, industrial dynamism, bold geometric fragmentation
+Purism art movement, still life simplification, muted earth tones, post-cubist clean geometric forms
+Rayonism art, dynamic rays of light intersecting, abstract Russian avant-garde movement
+Tonalism painting, soft hazy atmospheric landscapes, muted color harmonies, twilight mood, late 19th century
+Barbizon school painting, naturalistic landscape, peasants working, soft impressionistic brushwork
+Hudson River School painting, romantic American wilderness, golden light, dramatic sublime landscapes
+Pre-Raphaelite Brotherhood, detailed naturalistic figures, vivid jewel colors, medieval and literary themes
+Arts and Crafts movement, handcrafted decorative arts, William Morris floral patterns, medieval revival
+Art Nouveau architecture, organic curves, wrought iron botanical motifs, stained glass, Hector Guimard
+Jugendstil illustration, flowing organic forms, decorative borders, elegant linear curves, German Art Nouveau
+Vienna Secession style, geometric gold patterns, Klimt-influenced decorative art, ornamental square format
+Russian Constructivist textile, bold geometric patterns, propaganda-themed fabric design, red and black
+Postmodern architecture, ironic classical references, decorative columns, pastel colors, playful proportions
+Deconstructivist architecture, fragmented angular forms, impossible geometry, Frank Gehry inspired chaos
+Brutalist concrete architecture, raw unfinished concrete, monolithic forms, imposing scale, mid century
+High-tech architecture, exposed structural elements, glass and steel, industrial pipes visible, futuristic
+Bauhaus school poster, primary colors with sans-serif typography, modernist grid layout, functional design
+Wabi-sabi Japanese aesthetic, imperfect beauty, weathered materials, muted earth tones, asymmetry, simplicity
+Ma Japanese negative space, minimalist composition, large empty areas, restrained calligraphic brushstroke
+Japanese kintsugi pottery, golden repair lines, broken ceramic, wabi-sabi aesthetic, elegant imperfection
+Memphis Milano design, squiggly postmodern shapes, pastel terrazzo patterns, Ettore Sottsass aesthetic
+Glasnost era propaganda poster, simplified bold graphics, optimistic Soviet aesthetic, limited color palette
+Flat design illustration, modern vector style, no gradients, bold solid colors, clean geometric shapes
+Material design, soft shadows, layered surfaces, vibrant primary palette, Google design language
+Neumorphism UI, soft inner shadows, monochromatic pastel surfaces, subtle inset embossed elements
+Glassmorphism UI, frosted glass blurred background, semi-transparent panels, colorful gradient backdrop
+Bauhaus color blocks, primary geometric, bold black grid lines, functional asymmetric layout
+Risograph poster style, two-tone duotone print, slight misregistration, indie zine, fluorescent pink and blue
+Foil stamped art print, metallic gold and silver accents, embossed paper, luxurious tactile finish
+Holographic sticker, iridescent rainbow foil, kawaii illustration, anime eyes, shimmery background
+Engraved Victorian illustration, extremely detailed hatching, penny dreadful aesthetic, ornate borders

@@ -1,72 +1,153 @@
-Asuka Langley Soryu, red plugsuit, fiery red hair, blue eyes, confident smirkRei Ayanami, white plugsuit, blue hair, red eyes, stoic expressionMotoko Kusanagi, cyborg body, purple hair, tactical leotard, serious gazeFaye Valentine, yellow crop top, purple hair, retro sci-fi bounty hunterPrincess Leia, white robe, iconic cinnamon bun hair, regal postureHermione Granger, Gryffindor robes, bushy brown hair, holding a wandLara Croft, teal tank top, brown shorts, dual pistols, athletic buildSamus Aran, orange power suit, visor reflecting space, zero suit variationWonder Woman, red and gold armor, lasso of truth, raven hair
-Buffy Summers, blonde hair, leather jacket, holding a wooden stake
-Katniss Everdeen, braid hair, black bow and arrow, dystopian survival gear
-Black Widow, black tactical catsuit, red hair, holding pistols
-Sarah Connor, tank top, muscular build, holding a shotgun, 90s aesthetic
-Ellen Ripley, flight suit, short hair, exhausted but determined expression
-Fa Mulan, traditional Chinese armor, sword, black hair blowing in wind
-Cinderella, blue ballgown, blonde updo, glass slippers, sparkling magic
-Belle, yellow ballgown, brown hair, holding a red rose, fairytale setting
-Ariel, green mermaid tail, red flowing hair, purple seashell bra
-Jasmine, turquoise harem pants, crop top, long black hair, sultan's daughter
-Pocahontas, fringed deerskin dress, tattoo, black hair blowing in wind
-Tifa Lockhart, white crop top, black mini skirt, fighting gloves, brunette
-Aerith Gainsborough, pink dress, long brown braid, holding a staff
-Yuna, white summoner outfit, heterochromia blue/green eyes, staff
-Rikku, yellow bikini top, green shorts, blonde hair, Al Bhed goggles
-Princess Zelda, white and gold dress, pointed ears, blonde hair, regal
-Lucina, blue hair, Falchion sword, masked tactician outfit
-Byleth, dark blue hair, black academy uniform, sword of the creator
-2B, black gothic dress, silver hair, black blindfold, holding katana
-A2, black combat outfit, short white hair, holding large katana
-Makima, white shirt, tie, auburn hair braided, creepy calm expression
-Power, pink blood-soaked shirt, blonde hair, sharp teeth, chaotic energy
-Nobara Kugisaki, orange hair, black uniform, holding a hammer and nails
-Mitsuri Kanroji, pink and green gradient hair, revealing demon slayer uniform
-Shinobu Kocho, black hair with purple tips, butterfly hairpin, calm smile
-Nezuko Kamado, pink eyes, bamboo muzzle, orange hair, demon features
-Rukia Kuchiki, black shinigami uniform, short black hair, holding zanpakuto
-Winry Rockbell, blonde hair, mechanic overalls, holding a wrench
-Riza Hawkeye, military uniform, blonde hair, holding a sniper rifle
-Nico Robin, black hair, purple leather jacket, archaeologist
-Nami, orange hair, bikini top, holding a weather staff, navigator
-Boa Hancock, red dress, long black hair, snake around her, beautiful
-Erza Scarlet, red hair, requip armor, holding a broadsword
-Mirajane Strauss, white hair, blue barmaid outfit, satan soul transformation
-Sailor Moon, blonde odango hair, blue and white sailor uniform, magic wand
-Sailor Mars, long black hair, red and white sailor uniform, holding fire
-Ryuko Matoi, black and red seifuku, red scissor blade, fierce expression
-Satsuki Kiryuin, white and blue uniform, blue hair, holding katana
-Madoka Kaname, pink magical girl dress, pink twin tails, holding a bow
-Homura Akemi, black hair, purple shield, time-traveler outfit
-Violet Evergarden, white ribbon dress, blonde hair, mechanical arms
-Zero Two, pink hair, red uniform, horns, holding a giant weapon
-Frieren, white mage robe, long white hair, elf ears, stoic
-Fern, purple mage robe, dark purple hair, holding a staff
-Holo the Wise Wolf, brown tail, wolf ears, rustic peasant clothes
-Raphtalia, raccoon ears and tail, red kimono, holding a sword
-Aqua, blue hair, blue outfit, goddess, holding a staff
-Megumin, red wizard hat, black cloak, red eyes, explosion magic
-Darkness, blonde hair, crusader armor, masochistic knight
-Albedo, black wings, white dress, golden eyes, succubus
-Shalltear Bloodfallen, pale skin, blonde pig tails, red vampire eyes
-Rem, blue maid outfit, blue hair, holding a morning star
-Ram, pink maid outfit, pink hair, holding a morning star
-Emilia, white and purple outfit, silver hair, elf ears
-Beatrice, pink dress, blonde drill hair, holding a book
-Shiro, white hair, purple eyes, flying in the sky, angelic
-Jibril, pink hair, blue wings, angelic outfit, holding a book
-Jinx, blue braids, punk rock outfit, holding a rocket launcher, crazy smile
-Vi, pink hair, red leather jacket, heavy gauntlets, muscular build
-Caitlyn, blue hair, Victorian sheriff outfit, holding a rifle
-Mel Medarda, dark skin, gold and white dress, regal
-Korra, dark skin, blue water tribe outfit, muscular build, waterbending
-Xena, black leather armor, dark hair, chakram, warrior princess
-Trinity, black leather catsuit, short black hair, sunglasses, matrix code
-Imperator Furiosa, shaved head, mechanical arm, war paint, driving rig
-Storm, white hair, black bodysuit, cape, summoning lightning
-Jean Grey, green and yellow uniform, red hair, telepathic cosmic aura
-Furina, blue and white outfit, blue hair, theatrical pose, hydro archon
-Raiden Shogun, purple and white kimono, purple hair, holding a sword, electro
-Yor Forger, black dress, black hair, golden eyes, holding assassin knives
-Frieren, white robe, blonde hair, holding a grimoire, beautiful witch
+Asuka Langley Soryu wearing her red plugsuit, fiery red hair flowing, blue eyes glaring with confident smirk
+Rei Ayanami in her white plugsuit, pale blue hair framing red eyes, stoic expression, mysterious and ethereal
+Motoko Kusanagi full cybernetic prosthetic body, purple short hair, tactical black leotard, serious analytical gaze
+Faye Valentine in yellow crop top and purple hair, retro sci-fi bounty hunter, gun on her hip, lounging
+Princess Leia Organa in flowing white robe, iconic cinnamon bun hair, regal posture, silver minimalist jewelry
+Hermione Granger in Gryffindor school robes, bushy brown hair, gripping her wand with determined scholarly focus
+Lara Croft in teal tank top, brown cargo shorts, dual pistols holstered, athletic muscular build, confident stance
+Samus Aran in orange power suit, reflective visor, plasma cannon charging, heroic zero suit variation beneath
+Wonder Woman in red and gold Amazonian armor, golden lasso of truth coiled, raven black hair, divine warrior
+Buffy Summers in worn leather jacket, blonde hair flowing, wielding a wooden stake, vampire slayer attire
+Katniss Everdeen with signature side braid, black bow drawn, dystopian survival gear, mockingjay pin glinting
+Natasha Romanoff Black Widow in black tactical catsuit, red hair tied, dual pistols, deadly poised assassin
+Sarah Connor in white tank top, muscular build, holding a sawed-off shotgun, 90s apocalyptic aesthetic grit
+Ellen Ripley in worn flight suit, short cropped hair, exhausted but determined expression, burning resolve
+Fa Mulan in traditional Chinese armor, holding her father's sword, black hair blowing in the wind
+Cinderella in shimmering blue ballgown, blonde elegant updo, glass slippers sparkling, magical transformation moment
+Belle in her golden yellow ballgown, brown hair cascading, holding a red rose, fairytale library setting
+Ariel the Little Mermaid with emerald green mermaid tail, red flowing hair, purple seashell bra, ocean bubbles
+Jasmine in turquoise harem pants, jeweled crop top, long black hair, sultan's daughter, confident streetwise pose
+Pocahontas in fringed deerskin dress, tribal tattoo, long black hair blowing, standing on cliff edge
+Tifa Lockhart in white crop top, black mini skirt, fighting gloves, long brunette hair, fists clenched
+Aerith Gainsborough in pink dress, long brown braid, holding her staff, flowers blooming around her
+Yuna in white summoner ceremonial outfit, heterochromia blue and green eyes, staff in hand, ethereal
+Rikku in yellow bikini top, green cargo shorts, blonde Al Bhed hair, goggles pushed up, mischievous grin
+Princess Zelda in flowing white and gold dress, pointed elf ears, blonde regal hair, holding sacred triforce
+Lucina with blue flowing hair, Falchion sword drawn, masked tactician outfit, determined warrior princess
+Byleth in dark blue academy uniform, black hair tied back, Sword of the Creator in hand, stoic teacher
+2B from NieR Automata in black gothic dress, silver bobbed hair, black blindfold, holding her Virtuous Contract katana
+A2 from NieR Automata in black combat outfit, short white hair, holding large Type-3 Sword, battle-scarred veteran
+Makima in white dress shirt and black tie, auburn hair braided, creepy calm expression, glowing yellow ringed eyes
+Power from Chainsaw Man in pink blood-soaked shirt, blonde hair horns, sharp teeth, chaotic demonic energy
+Nobara Kugisaki with short orange hair, Jujutsu High black uniform, holding hammer and nails, defiant pose
+Mitsuri Kanroji with pink and green gradient long hair, revealing demon slayer uniform, gentle loving smile
+Shinobu Kocho with black hair fading to purple tips, butterfly hairpin, calm mysterious smile, insect hashira
+Nezuko Kamado with glowing pink eyes, bamboo muzzle, long orange hair, demon features, protective sibling
+Rukia Kuchiki in black shinigami kimono, short black hair, holding her zanpakuto, noble Soul Reaper captain
+Winry Rockbell with blonde ponytail, mechanic overalls, holding a wrench, automail engineer, cheerful smile
+Riza Hawkeye in military uniform, blonde hair tied, holding a sniper rifle, sharp calm eyes, loyal
+Nico Robin with long black hair, purple leather jacket, archaeologist outfit, multiple hands sprouting dramatically
+Nami with orange hair, bikini top, holding her climate staff, navigating with confident smirk, pirate
+Boa Hancock in flowing red dress, long black hair, snake coiled around her, most beautiful woman alive
+Erza Scarlet with long scarlet red hair, requip armor shifting, holding a broadsword, stern S-class mage
+Mirajane Strauss with white hair, blue barmaid outfit, satan soul transformation, devil horns emerging powerfully
+Sailor Moon Usagi in blue and white sailor uniform, blonde odango twin tails, holding magical moon wand
+Sailor Mars Rei in red and white sailor uniform, long black hair, holding sacred fire, miko shrine maiden
+Ryuko Matoi in black and red seifuku school uniform, wielding red scissor blade, fierce determined expression
+Satsuki Kiryuin in white and blue disciplined uniform, blue hair, holding her Bakuzan katana, imposing presence
+Madoka Kaname in pink magical girl flowing dress, pink twin tails, holding her glowing soul bow, hopeful
+Homura Akemi with long black hair, purple shield barrier, time-traveler outfit, melancholic protective expression
+Violet Evergarden in elegant white ribbon dress, blonde hair, intricate mechanical arms, writing letters delicately
+Zero Two with pink flowing hair, red military uniform, small red horns, wielding a giant lance, flirty
+Frieren the Slayer with white mage robe, long white hair, pointed elf ears, stoic thousand-year-old mage
+Fern from Frieren in purple mage robe, dark purple hair, holding her staff, apprentice mage casting spell
+Holo the Wise Wolf with bushy brown tail, wolf ears, rustic medieval peasant clothes, mischievous fox deity
+Raphtalia with raccoon ears and tail, red kimono armor, holding a katana, loyal shield hero companion
+Aqua from KonoSuba with blue hair, blue and white goddess outfit, holding her staff, useless party member
+Megumin in crimson wizard hat, black cloak, red eyes, casting explosion magic, single spell per day
+Darkness in shining crusader armor, blonde hair, masochistic knight, begging to be hit by monster
+Albedo from Overlord with black feathered wings, white elegant dress, golden eyes, succubus maid overseer
+Shalltear Bloodfallen with pale porcelain skin, blonde pig tails, red vampire eyes, gothic lolita dress
+Rem from Re:Zero in blue maid outfit, short blue hair, holding her morning star mace, devoted
+Ram from Re:Zero in pink maid outfit, short pink hair, holding her wind magic mace, sharp tongue
+Emilia in white and purple witch outfit, silver long hair, pointed elf ears, holding magical crystal
+Beatrice the witch in pink gothic lolita dress, blonde drill hair curls, holding her grimoire book
+Shiro from No Game No Life with white hair, purple eyes, floating angelically, calculating genius sibling
+Jibril from No Game No Life with pink hair, blue wings, angelic outfit, holding massive lexicone book
+Jinx from Arcane with long blue braids, punk rock outfit, holding a rocket launcher, chaotic unhinged smile
+Vi from Arcane with short pink hair, red leather jacket, massive hextech gauntlets, muscular fighter build
+Caitlyn from Arcane with blue hair tied back, Victorian sheriff outfit, holding a hextech sniper rifle
+Mel Medarda with dark skin and golden regal dress, Arcane Noxian nobility, commanding powerful presence
+Korra from Legend of Korra with dark skin, blue Water Tribe outfit, muscular athletic build, waterbending pose
+Xena Warrior Princess in black leather armor, dark hair flowing, holding her chakram, warrior stance
+Trinity from The Matrix in black leather catsuit, short black hair, sunglasses, glitching matrix code behind
+Imperator Furiosa with shaved head, mechanical prosthetic arm, war paint, driving war rig across desert
+Storm from X-Men with long white hair, black bodysuit, flowing cape, summoning a lightning bolt dramatically
+Jean Grey with flowing red hair, green and yellow Phoenix uniform, telepathic cosmic fiery aura glowing
+Furina from Genshin Impact in blue and white elegant outfit, blue hair, theatrical pose, Hydro Archon drama
+Raiden Shogun from Genshin Impact in purple and white kimono, purple hair tied, holding a naginata, Electro
+Yor Forger from Spy x Family in black assassin dress, black hair, golden eyes, holding throwing knives
+Robin from Honkai Star Rail in futuristic punk outfit, golden eyes, holding gun, smart rail mage
+Kafka from Honkai Star Rail in black bunny suit, lavender hair, holding handgun, mysterious bounty hunter
+Himeko from Honkai Star Rail in long red coat, red hair, wielding a flaming greatsword, captain of Astral Express
+March 7th from Honkai Star Rail in pink and white winter outfit, pink hair, holding ice bow
+Firefly from Honkai Star Rail in black and yellow mech suit, green hair, holding dual blades, SAM suit
+Sparkle from Honkai Star Rail in jester colorful outfit, white hair, holding cards, mischievous trickster
+Acheron from Honkai Star Rail in red and black coat, long dark hair, wielding a nodachi, rainy abyss
+Boothill from Honkai Star Rail in cowboy western outfit, white hair, dual revolvers, galaxy ranger bounty hunter
+Black Swan from Honkai Star Rail in flowing dark dress, blue hair, holding an orrery, memory hunter
+Topaz from Honkai Star Rail in corporate yellow outfit, glasses, holding briefcase, IPC senior manager
+Mavuika from Genshin Impact in motorcycle rider outfit, long red hair, wielding a flaming greatsword, Natlan
+Citlali from Genshin Impact in white and pink shaman outfit, white hair, holding ice staff, Natlan sorcerer
+Chiori from Genshin Impact in elegant kimono, dark hair, holding fabric scissors, Inazuma fashion designer
+Sigewinne from Genshin Impact in blue and white medical outfit, pink hair, Melusine nurse, holding syringe
+Arlecchino from Genshin Impact in black and white long coat, white hair, holding crimson scythe, Knave of Fatuus
+Yumeko Jabami from Kakegurui in school uniform, long black hair, sharp manic smile, gambling addiction stare
+Mary Saotome from Kakegurui in red and white school uniform, blonde hair, smug confident poker player
+Rize Kamishiro from Tokyo Ghoul in red dress, purple hair, holding ghoul kagune, predatory hungry eyes
+Touka Kirishima from Tokyo Ghoul in black school uniform, purple hair, holding ghoul kagune, coffee shop girl
+Akira Mado from Tokyo Ghoul in white suit, blue hair, ghoul investigator, holding quinque, calculating
+Yoruichi Shihoin from Bleach in dark skin, long purple hair, golden eyes, black cat form shifting, Shinigami
+Rangiku Matsumoto from Bleach in Shinigami uniform, long orange hair, holding Zanpakuto, lazy but deadly
+Orihime Inoue from Bleach in school uniform, long orange hair, holding her Shun Shun Rikka fairy hairpins
+Yoru from Chainsaw Man in dark suit, dark hair, holding a katana, war devil form, ancient fears
+Reze from Chainsaw Man in school uniform with red ribbon, blonde hair, holding bomb pins, hybrid devil
+Kobeni Higashiyama from Chainsaw Man in shirt and tie, black hair, holding a devil contract knife, panicked
+Anna Nishikinomiya from Shimoneta in school uniform, blonde hair, holding chainsaw, absurd perverse comedy violence
+Albedo from KonoSuba with black feathered wings, white elegant dress, golden eyes, succubus overseer, obsessive
+Komekko from KonoSuba, small girl with blue hair, white dress, casting explosion magic, adorable loli
+Lalatina Dustiness Ford Darkness in shining crusader armor, blonde hair, masochistic crusader, begging to be hit
+Yunyun from KonoSuba in crimson wizard hat, black cloak, red eyes, lonely shy arch wizard, single explosion
+Wiz from KonoSuba in blue witch robe, blue hair, undead lich, casting powerful ancient magic respectfully
+Hinata Hyuga from Naruto in blue and white outfit, long dark hair, Byakugan eyes activated gently
+Sakura Haruno from Naruto in red qipao dress, pink hair, summoning medical ninjutsu, fists ready, kunoichi
+Ino Yamanaka from Naruto in purple outfit, blonde ponytail, mind transfer jutsu active, kunoichi ninja
+Tenten from Naruto in green outfit, brown hair, wielding massive scroll weapons, weapons specialist ninja
+Temari from Naruto in sand village outfit, blonde hair, holding her giant war fan, kunoichi strategist
+Tsunade from Naruto in green kunoichi outfit, blonde pigtails, summoning slug, legendary medical ninja, fifth hokage
+Android 18 from Dragon Ball in denim vest and striped shirt, blonde hair, holding energy sphere, lethal
+Bulma from Dragon Ball in capsule corp outfit, blue hair, holding gadget, genius scientist, Capsule Corp heir
+Chi-Chi from Dragon Ball in traditional Chinese dress, black hair, holding Ox King sword, martial artist
+Launch from Dragon Ball in blue denim, blonde hair, holding machine gun, sneezing transformation trigger
+Videl from Dragon Ball in Great Saiyaman outfit, black hair, holding flying pose, Mr Satan daughter fighter
+Caulifla from Dragon Ball Super in green Saiyan armor, purple hair, powering up Super Saiyan, fierce
+Kale from Dragon Ball Super in green shirt, long black hair, holding Broly form back, timid Berserker
+Android 21 from Dragon Ball FighterZ in white lab coat, pink hair, holding lab tech, evil scientist
+Mai from Dragon Ball in purple warrior outfit, black hair, holding pistol, future timeline warrior princess
+Marcy Wu from Amphibia in red and white jacket, dark hair, holding sword, true anime fan, loyal friend
+Anne Boonchuy from Amphibia in school uniform, brown hair, holding sword Calamity, Thai-American anime protagonist
+Sasha Waybright from Amphibia in scout uniform, blonde hair, holding battle lance, amphibian warrior queen
+Lady Rainicorn from Adventure Time in tall rainbow body, blue hair, talking on phone, Korean translator girlfriend
+Marceline from Adventure Time in grey t-shirt, dark hair, holding axe bass guitar, vampire queen musician
+Princess Bubblegum from Adventure Time in pink gown, pink hair, holding science flask, genius scientist ruler
+Fionna from Adventure Time in white shirt, blonde hair, holding sword, parallel multiverse hero, Cat Fionna
+Cake from Adventure Time, tall pink cat, holding weapons, rainbow sister, multiverse cat companion
+Betty Grof from Adventure Time in green dress, black hair, holding chaos magic amulet, anti-Gumdrops scientist
+Lapis Lazuli from Steven Universe in blue outfit, blue hair, holding water wings, terraforming power, reformed
+Peridot from Steven Universe in green limb enhancers, yellow hair, holding metal powers, homeworld defector
+Pearl from Steven Universe in pale outfit, pointed hair, holding spear, elegant gem swordfighter, loyal
+Garnet from Steven Universe in visor and red bodysuit, square afro, holding gauntlets, fusion gem leader
+Rose Quartz from Steven Universe in flowing white dress, pink hair, holding sword, gentle warrior mother
+Connie Maheswaran from Steven Universe in purple jacket, dark hair, holding Rose sword, human gem warrior
+Spinel from Steven Universe in pink and red outfit, pink hair, holding injector scythe, abandoned jester
+Asuka Langley Soryu Mark Nine Evangelion Unit, wearing purple interface headgear, red plugsuit, intense blue eyes
+Rei Ayanami next to giant Evangelion Unit, white plugsuit, blue hair, holding crossbow of Lance of Longinus
+Motoko Kusanagi diving through cityscape, full cybernetic body, tactical leotard, holding her iconic pistol, Section 9
+Faye Valentine lounging on spaceship bed, yellow crop top, purple hair, smoking, gun nearby, lazy bounty hunter
+Princess Leia in white Hoth outfit, cinnamon bun hair, holding blaster, rebel leader on ice planet
+Hermione Granger in Yule ball pink dress, bushy brown hair, tiara, magical moment, bookish beauty
+Lara Croft exploring ancient tomb, teal tank top, dual pistols, torch in hand, athletic adventurer archaeologist
+Samus Aran without helmet, blonde hair, blue eyes, Zero Suit Samus form, sleek and deadly bounty hunter
+Wonder Woman wielding her shield, red and gold armor, lasso of truth, soaring through clouds, Amazonian princess
+Buffy the Vampire Slayer in prom dress, blonde hair, holding stake, slaying on dance floor, iconic moment
+Katniss Everdeen mockingjay pose, side braid, black bow drawn, fire explosion behind her, rebellion fire starter

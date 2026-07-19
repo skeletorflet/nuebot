@@ -160,6 +160,27 @@ def _resolve_params(callback: CallbackQuery, jobs: JobManager, task_id: str) -> 
 
 # --- Helpers de ejecución ---------------------------------------------------
 
+async def _send_status(bot: Bot, chat_id: int, label: str, reply_to: int | None) -> int | None:
+    """Manda un mensaje efímero 'Generando X...' y devuelve su message_id.
+
+    Se borra en el finally del caller. Si reply_to es None, lo manda suelto.
+    """
+    try:
+        sent = await bot.send_message(chat_id, label, reply_to_message_id=reply_to)
+        return sent.message_id
+    except Exception:
+        return None
+
+
+async def _delete_status(bot: Bot, chat_id: int, status_id: int | None) -> None:
+    if status_id is None:
+        return
+    try:
+        await bot.delete_message(chat_id, status_id)
+    except Exception:
+        pass
+
+
 async def _run_txt2img(
     bot: Bot,
     jobs: JobManager,
@@ -168,39 +189,47 @@ async def _run_txt2img(
     params: JobParams,
     *,
     with_hr: bool,
+    reply_to: int | None = None,
+    status_label: str | None = None,
 ) -> tuple[str, bytes] | None:
     """Devuelve (task_id_nuevo, png_bytes). None si falla."""
-    generation = load_generation_settings()
-    hr_block = build_hr_block(steps=params.steps, settings=generation) if with_hr else None
-    payload = build_txt2img_payload(
-        prompt=params.prompt,
-        negative_prompt=params.negative_prompt,
-        width=params.width,
-        height=params.height,
-        steps=params.steps,
-        cfg_scale=params.cfg_scale,
-        sampler=params.sampler,
-        scheduler=params.scheduler,
-        seed=params.seed,
-        n_iter=1,
-        hr=hr_block,
-        settings=generation,
-    )
-    result = await sd.txt2img(payload, payload_init=payload)
-    img_b64 = result.images_b64[0]
-    png = base64.b64decode(img_b64)
+    status_id = None
+    if status_label:
+        status_id = await _send_status(bot, chat_id, status_label, reply_to)
+    try:
+        generation = load_generation_settings()
+        hr_block = build_hr_block(steps=params.steps, settings=generation) if with_hr else None
+        payload = build_txt2img_payload(
+            prompt=params.prompt,
+            negative_prompt=params.negative_prompt,
+            width=params.width,
+            height=params.height,
+            steps=params.steps,
+            cfg_scale=params.cfg_scale,
+            sampler=params.sampler,
+            scheduler=params.scheduler,
+            seed=params.seed,
+            n_iter=1,
+            hr=hr_block,
+            settings=generation,
+        )
+        result = await sd.txt2img(payload, payload_init=payload)
+        img_b64 = result.images_b64[0]
+        png = base64.b64decode(img_b64)
 
-    new_id = new_task_id()
-    new_params = apply_result_info(params, result.info_json)
-    new_params = replace(new_params, kind="hires" if with_hr else "txt2img")
-    jobs.remember(new_id, new_params)
+        new_id = new_task_id()
+        new_params = apply_result_info(params, result.info_json)
+        new_params = replace(new_params, kind="hires" if with_hr else "txt2img")
+        jobs.remember(new_id, new_params)
 
-    kind_label = "HR" if with_hr else "txt2img"
-    caption = format_caption(new_id, kind_label, new_params)
-    document = BufferedInputFile(png, filename=f"{new_id}_{kind_label}.png")
-    markup = kb_hires(new_id) if with_hr else kb_txt2img(new_id)
-    await bot.send_document(chat_id, document=document, caption=caption, reply_markup=markup)
-    return new_id, png
+        kind_label = "HR" if with_hr else "txt2img"
+        caption = format_caption(new_id, kind_label, new_params)
+        document = BufferedInputFile(png, filename=f"{new_id}_{kind_label}.png")
+        markup = kb_hires(new_id) if with_hr else kb_txt2img(new_id)
+        await bot.send_document(chat_id, document=document, caption=caption, reply_markup=markup)
+        return new_id, png
+    finally:
+        await _delete_status(bot, chat_id, status_id)
 
 
 # --- Handlers ---------------------------------------------------------------
@@ -218,7 +247,12 @@ async def on_repeat(callback: CallbackQuery, callback_data: Repeat, bot: Bot,
         return
     # ponytail: REPETIR conserva todo el snapshot salvo seed para variar el resultado.
     params = replace(params, seed=-1)
-    await _run_txt2img(bot, jobs, sd, callback.message.chat.id, params, with_hr=False)
+    await _run_txt2img(
+        bot, jobs, sd, callback.message.chat.id, params,
+        with_hr=False,
+        reply_to=callback.message.message_id,
+        status_label="🔁 Repitiendo...",
+    )
 
 
 @router.callback_query(HR.filter())
@@ -232,7 +266,12 @@ async def on_hr(callback: CallbackQuery, callback_data: HR, bot: Bot,
             f"¿Es una imagen vieja sin bloque ⚙ en el caption?"
         )
         return
-    await _run_txt2img(bot, jobs, sd, callback.message.chat.id, params, with_hr=True)
+    await _run_txt2img(
+        bot, jobs, sd, callback.message.chat.id, params,
+        with_hr=True,
+        reply_to=callback.message.message_id,
+        status_label="✨ HR Upscale...",
+    )
 
 
 @router.callback_query(FinalUpscale.filter())
@@ -247,42 +286,47 @@ async def on_final(callback: CallbackQuery, callback_data: FinalUpscale,
         )
         return
     generation = load_generation_settings()
-    # Re-generamos con los mismos params en txt2img normal (rápido) y después
-    # le pasamos la imagen al upscaler extra. Es la única forma de tener un
-    # b64 base sin pedirle al usuario que la resubmita.
-    payload = build_txt2img_payload(
-        prompt=params.prompt,
-        negative_prompt=params.negative_prompt,
-        width=params.width,
-        height=params.height,
-        steps=params.steps,
-        cfg_scale=params.cfg_scale,
-        sampler=params.sampler,
-        scheduler=params.scheduler,
-        seed=params.seed,
-        n_iter=1,
-        settings=generation,
-    )
-    result = await sd.txt2img(payload, payload_init=payload)
-    img_b64 = result.images_b64[0]
+    status_id = await _send_status(bot, callback.message.chat.id,
+                                  "💎 Upscale Final...", callback.message.message_id)
+    try:
+        # Re-generamos con los mismos params en txt2img normal (rápido) y después
+        # le pasamos la imagen al upscaler extra. Es la única forma de tener un
+        # b64 base sin pedirle al usuario que la resubmita.
+        payload = build_txt2img_payload(
+            prompt=params.prompt,
+            negative_prompt=params.negative_prompt,
+            width=params.width,
+            height=params.height,
+            steps=params.steps,
+            cfg_scale=params.cfg_scale,
+            sampler=params.sampler,
+            scheduler=params.scheduler,
+            seed=params.seed,
+            n_iter=1,
+            settings=generation,
+        )
+        result = await sd.txt2img(payload, payload_init=payload)
+        img_b64 = result.images_b64[0]
 
-    up_payload = build_extra_payload(image_b64=img_b64, settings=generation)
-    up_b64 = await sd.extra_single_image(up_payload)
-    import base64
-    png = base64.b64decode(up_b64)
+        up_payload = build_extra_payload(image_b64=img_b64, settings=generation)
+        up_b64 = await sd.extra_single_image(up_payload)
+        import base64
+        png = base64.b64decode(up_b64)
 
-    new_id = new_task_id()
-    final_params = apply_result_info(params, result.info_json)
-    final_params = replace(final_params, kind="final")
-    jobs.remember(new_id, final_params)
-    caption = format_caption(new_id, f"Final x{generation.final_upscale['upscaling_resize']}", final_params)
-    document = BufferedInputFile(png, filename=f"{new_id}_final.png")
-    await bot.send_document(
-        callback.message.chat.id,
-        document=document,
-        caption=caption,
-        reply_markup=kb_final(new_id),
-    )
+        new_id = new_task_id()
+        final_params = apply_result_info(params, result.info_json)
+        final_params = replace(final_params, kind="final")
+        jobs.remember(new_id, final_params)
+        caption = format_caption(new_id, f"Final x{generation.final_upscale['upscaling_resize']}", final_params)
+        document = BufferedInputFile(png, filename=f"{new_id}_final.png")
+        await bot.send_document(
+            callback.message.chat.id,
+            document=document,
+            caption=caption,
+            reply_markup=kb_final(new_id),
+        )
+    finally:
+        await _delete_status(bot, callback.message.chat.id, status_id)
 
 
 @router.callback_query(Retry.filter())

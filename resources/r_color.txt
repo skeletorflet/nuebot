@@ -1,80 +1,139 @@
-amaranth deep purple
-amethyst vibrant violet
-amber glowing orange
-arctic frost white
-ashy rose pink
-auroral teal
-azure radiant blue
-battleship grey
-beige sandstone
-bioluminescent cyan
-bistre dark brown
-blackest obsidian
-blood red crimson
-blush pale pink
-brass metallic gold
-brilliant emerald
-bronze metallic brown
-burnt sienna orange
-cadet blue-grey
-camo olive green
-canary bright yellow
-caramel tan
-cardinal red
-carnation pink
-celestial blue
-cerulean ocean blue
-charcoal dark grey
-chartreuse yellow-green
-chestnut reddish-brown
-chocolate rich brown
-cobalt deep blue
-copper burnt orange
-coral reef orange
-cornflower blue
-cream ivory
-crimson blood red
-cyan electric blue
-daffodil yellow
-dandelion yellow
-denim faded blue
-drab olive green
-eggplant dark purple
-emerald forest green
-feldgrau dark green-grey
-firebrick red
-flamingo pink
-flax golden yellow
-forest deep green
-fuchsia vivid purple
-garnet deep red
-ghostly pale grey
-glaucous sea-green
-goldenrod yellow
-grizzly brown
-gunmetal dark grey
-hazel green-brown
-heliotrope purple
-honey amber
-hunter green
-indigo deep blue
-iridescent opal
-ivory white
-jade green
-jasmine yellow
-khaki tan
-lavender light purple
-lemon bright yellow
-lilac pale purple
-lime neon green
-mahogany dark red-brown
-malachite green
-maroon dark red
-mauve muted purple
-midnight blue
-mint pastel green
-mocha coffee brown
-mustard yellow
-myrtle dark green
-obsidian black
-ochre earthy yellow
+amaranth deep saturated reddish purple with crimson undertones, vibrant and warm
+amethyst vibrant violet with bluish purple highlights, gemstone-like saturated jewel tone
+amber glowing warm orange with honeyed golden highlights, translucent resin appearance
+arctic frost pure white with the faintest icy blue undertone, crystalline frozen surface
+ashy rose muted dusty pink with warm gray undertones, faded vintage floral petal
+auroral glowing teal with green and violet northern lights shimmering color shift
+azure radiant pure sky blue, saturated bright tropical lagoon water clarity
+battleship industrial flat dark gray, matte military naval vessel paint tone
+beige sandstone soft warm sandy beige, sun-bleached desert dune neutral earth tone
+bioluminescent vivid cyan with glowing radioactive green undertone, deep sea creature neon
+bistre rich dark yellowish brown, warm tree-bark and aged parchment ink tone
+blackest pure obsidian black, light-absorbing void with no reflective highlights whatsoever
+blood red deep crimson with dark burgundy undertones, arterial fresh blood saturation
+blush pale soft baby pink with subtle warm peachy undertones, delicate cheek color
+brass metallic warm antique gold with yellow-greenish patina, polished door hardware tone
+brilliant vibrant emerald green, saturated gemstone clarity with cool blue undertones
+bronze warm metallic brown with orange-gold sheen, aged statue oxidized patina
+burnt sienna deep earthy orange with warm brown undertones, terracotta clay pot color
+cadet blue-grey military uniform fabric color tone, understated service dress dusty
+camo muted olive green with brown and khaki blotches, woodland military pattern base
+canary bright cheerful pure yellow, cheerful songbird feather saturated tone
+caramel soft warm golden tan, melted butter and brown sugar dessert color
+cardinal vivid pure red with slight orange undertone, male songbird feather saturated
+carnation delicate soft pink with cool blue undertones, flower petal sweet tone
+celestial soft sky blue with subtle lavender undertone, heavenly open-air atmospheric hue
+cerulean deep ocean blue with slight green undertone, tropical shallow sea water tone
+charcoal deep matte dark gray with cool blue undertone, burnt wood ash pure tone
+chartreuse vivid yellow-green, electric lime with acidic neon energy and brightness
+chestnut warm reddish-brown with orange highlights, roasted autumn nut shell tone
+chocolate rich dark brown with warm reddish undertone, melted dark cocoa bean color
+cobalt pure deep saturated blue with violet undertone, vivid ceramic glaze gemstone
+copper warm burnt orange with metallic golden sheen, polished metal penny tone
+coral reef warm soft orange with pink undertones, tropical marine organism vivid hue
+cornflower medium soft blue with subtle violet-gray undertone, wild meadow flower tone
+cream soft warm ivory with yellow-pink undertones, fresh dairy gentle off-white
+crimson deep rich blood red with blue undertone, regal velvet curtain saturated tone
+cyan pure electric bright blue with green undertones, swimming pool neon vivid tone
+daffodil bright warm sunny yellow, spring flower petal cheerful saturated color
+dandelion warm soft yellow with slight green undertone, common wildflower petal tone
+denim faded washed indigo blue with gray undertone, vintage cotton workwear tone
+drab muted olive green with brown undertones, camouflage military fatigue flat tone
+eggplant deep dark purple with slight reddish-black undertone, glossy vegetable skin
+emerald vivid forest green with cool blue undertones, precious gemstone royal tone
+feldgrau muted dark green-grey, German military field uniform historical flat tone
+firebrick warm earthy red with brown undertone, kiln-fired clay brick natural tone
+flamingo soft warm bubblegum pink, tropical bird feather delicate pastel tropical tone
+flax pale golden yellowish beige, harvested plant fiber natural muted warm tone
+forest deep rich saturated green with cool blue undertone, dense woodland canopy tone
+fuchsia vivid bright magenta-pink, electric neon fluorescent flower petal tone
+garnet deep rich wine red with purple undertones, precious gemstone dark jewel tone
+ghostly pale washed-out translucent gray with slight blue undertone, ethereal vapor
+glaucous muted sea-green with gray-blue undertones, dusty olive leaf weathered tone
+goldenrod warm rich mustard yellow with orange undertone, autumn wildflower saturated
+grizzly warm muted dark brown, large mammal fur natural woodland earthy tone
+gunmetal cool dark blue-grey metallic, polished firearm barrel industrial sleek tone
+hazel warm green-brown blend with golden flecks, human eye iris natural multicolor
+heliotrope soft saturated purple with pink undertones, garden flower cluster vivid
+honey warm translucent amber with golden highlights, bee-produced syrup natural sweet tone
+hunter deep dark forest green with cool undertone, hunting jacket outdoor apparel tone
+indigo deep rich saturated blue with violet undertone, natural dye plant-based royal
+iridescent shimmering opal with rainbow color shifts, gemstone pearlescent prismatic surface
+ivory soft warm creamy white with yellow undertones, natural elephant tusk gentle tone
+jade soft muted green with cool gray undertone, precious carved gemstone Asian tone
+jasmine pale soft warm yellow, tropical flower petal delicate sweet floral tone
+khaki dusty tan with yellow-brown undertones, military uniform fabric neutral earthy
+lavender soft pale light purple with blue undertone, fragrant flower dried bouquet
+lemon bright vivid cheerful yellow with green undertone, citrus fruit peel saturated
+lilac soft pale purple with cool pink undertone, spring blooming shrub floral tone
+lime vivid bright neon green with yellow undertone, citrus fruit zest electric pop
+mahogany deep dark red-brown with warm undertones, tropical hardwood furniture polish
+malachite vivid bright green with darker banded stripes, copper ore gemstone pattern
+maroon deep dark brownish-red, dried blood chestnut winter fabric tone
+mauve soft muted dusty purple with gray undertone, vintage faded Victorian floral tone
+midnight deep saturated dark blue with purple undertone, nocturnal sky clear tone
+mint soft pale fresh green with blue undertones, refreshing herb leaf cool tone
+mocha warm coffee brown with reddish undertones, espresso bean roasted beverage tone
+mustard warm rich earthy yellow with brown undertones, condiment paste spicy vibrant
+myrtle dark muted blue-green with gray undertones, Mediterranean evergreen shrub leaf
+obsidian pure deep glossy black volcanic glass, light-absorbing mineral rich tone
+ochre earthy warm yellow-brown, natural clay pigment ancient paint muted tone
+apricot pale warm soft orange with pink undertones, ripe stone fruit flesh tone
+aquamarine pale sea green with blue undertones, transparent gemstone tropical water
+auburn warm reddish-brown chestnut, glossy autumn horse coat mahogany undertone
+azure deep saturated pure sky blue, summer clear atmosphere distant horizon tone
+bistre rich warm dark brown ink pigment, aged manuscript antique sepia tone
+bittersweet warm muted orange with reddish undertones, autumn foliage candy vibrant
+blackbean deep almost pure black with brown undertones, dried legume shell dark tone
+blond pale soft golden yellow, sun-kissed hair warm fair tone
+bluebell soft muted purple-blue woodland wildflower, springtime cluster tone delicate
+boysenberry dark muted purple-red, hybrid berry fruit syrup deep rich tone
+brick warm muted reddish orange, fired clay masonry urban weathered tone
+burgundy deep saturated wine red with purple undertones, fine aged grape vintage
+byzantine deep rich purple with blue undertones, ancient imperial mosaic regal tone
+cadet muted blue-grey military uniform, understated service dress fabric color tone
+camouflage mottled olive green with brown and tan patches, woodland pattern organic
+cantaloupe soft light orange-yellow with pink undertones, ripe melon flesh gentle
+cardinal vivid pure saturated red, ecclesiastical vestment bright accent color
+carmine deep rich vivid red with blue undertone, natural pigment ancient paint
+celadon pale soft green-grey, antique ceramic glaze Asian pottery delicate tone
+cerise bright vivid cherry pink, glossy fruit skin warm saturated tone
+champagne pale warm soft golden yellow, sparkling wine effervescent festive tone
+cherry bright vivid red-pink, ripe stone fruit glossy sweet accent color
+chestnut warm rich reddish-brown, roasted nut shell autumn harvest natural tone
+cinnamon warm earthy reddish-brown, aromatic spice bark fragrant kitchen tone
+claret deep rich purplish red, fine Bordeaux wine vintage deep saturated tone
+clay earthy warm muted reddish-brown, terracotta pottery raw material kiln-fired
+coffee dark roasted brown with reddish undertones, brewed espresso bean dark tone
+coral soft warm pinkish-orange, tropical marine organism reef habitat vivid
+corn pale soft warm yellow, harvested cereal grain dried kernel field tone
+cream soft warm off-white, dairy fresh gentle natural subtle elegant tone
+crimson deep rich vivid red, royal velvet curtain regal historic pigment
+daffodil bright cheerful sunny yellow, spring bulb flower cheerful vivid petal
+dahlia rich warm purplish-red, autumn garden flower large bloom saturated tone
+denim faded washed indigo blue, workwear cotton twill vintage casual garment tone
+desert sandy warm muted tan, arid landscape dune neutral sun-bleached tone
+ebony deep pure black-brown, tropical hardwood polished dark wood luxurious tone
+eggshell soft warm off-white, delicate avian shell surface natural gentle tone
+emerald vivid rich saturated green, precious gemstone royal cool deep tone
+fawn pale warm soft beige, young deer coat gentle natural animal tone
+fern soft muted earthy green, woodland undergrowth plant leaf natural tone
+flame bright vivid warm orange-red, combustion glow campfire ember luminous tone
+flax pale soft warm yellowish-beige, harvested plant fiber natural textile muted
+forest deep rich saturated cool green, dense woodland canopy natural cool tone
+fuchsia vivid bright magenta-pink, electric neon vibrant flower petal punch
+ginger warm muted reddish-orange, aromatic rhizome root kitchen spice vivid
+glacier pale soft icy blue, frozen mountain river ancient ice cold tone
+goldenrod warm rich mustard yellow, autumn wildflower prairie saturated bright tone
+grapefruit pale soft pinkish-orange, citrus fruit flesh refreshing morning tone
+graphite cool dark gray metallic, pencil writing tool industrial matte sheen
+grape rich deep saturated purple, vineyard fruit wine harvest deep tone
+grass vivid bright fresh green, springtime lawn healthy chlorophyll vibrant tone
+heather soft muted purple-grey, moorland shrub bloom misty cool gentle tone
+henna warm rich reddish-brown, natural dye body art traditional warm tone
+herbal muted soft sage green, dried kitchen leaf aromatic muted natural tone
+iris deep saturated violet-blue, garden flower spring bloom intense rich tone
+jasmine pale soft warm creamy yellow, tropical climbing vine bloom delicate tone
+jet pure deep rich absolute black, mineral gemstone saturated dark light-absorbing
+kelly bright vivid spring green, Irish heritage vibrant sports saturated tone
+kiwi bright vivid green-yellow, fuzzy fruit flesh tropical balanced warm-cool tone

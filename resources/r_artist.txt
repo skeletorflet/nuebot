@@ -1,80 +1,141 @@
-by Greg Rutkowski, epic fantasy painting, dramatic brushstrokes
-by Alphonse Mucha, Art Nouveau, elegant flowing lines, floral
-Giger, biomechanical, dark, alien, surreal
-by Hayao Miyazaki, Studio Ghibli, watercolor, lush, peaceful
-by Zdzislaw Beksinski, dystopian surrealism, nightmarish, intricate
-by Beeple, digital art, futuristic, neon, contemporary
+by Greg Rutkowski, epic fantasy painting, dramatic brushstrokes, characteristic signature style with distinctive aesthetic and brushwork
+by Alphonse Mucha, Art Nouveau, elegant flowing lines, floral, characteristic signature style with distinctive aesthetic and brushwork
+Giger, biomechanical, dark, alien, surreal, characteristic signature style with distinctive aesthetic and brushwork
+by Hayao Miyazaki, Studio Ghibli, watercolor, lush, peaceful, characteristic signature style with distinctive aesthetic and brushwork
+by Zdzislaw Beksinski, dystopian surrealism, nightmarish, intricate, characteristic signature style with distinctive aesthetic and brushwork
+by Beeple, digital art, futuristic, neon, contemporary, characteristic signature style with distinctive aesthetic and brushwork
 by Ilya Kuvshinov, anime style, flat colors, detailed eyes, portraits
-by Moebius, sci-fi, comic lines, surreal landscapes, vivid colors
-by Frank Frazetta, fantasy, muscular, oil painting, dynamic
-by Hokusai, ukiyo-e, woodblock print, traditional Japanese
-by Salvador Dali, surrealism, melting, dreamlike, realistic
-by Vincent van Gogh, post-impressionism, thick brushstrokes, swirling
-by Rembrandt, Baroque, chiaroscuro, dramatic lighting, portrait
+by Moebius, sci-fi, comic lines, surreal landscapes, vivid colors, characteristic signature style with distinctive aesthetic and brushwork
+by Frank Frazetta, fantasy, muscular, oil painting, dynamic, characteristic signature style with distinctive aesthetic and brushwork
+by Hokusai, ukiyo-e, woodblock print, traditional Japanese, characteristic signature style with distinctive aesthetic and brushwork
+by Salvador Dali, surrealism, melting, dreamlike, realistic, characteristic signature style with distinctive aesthetic and brushwork
+by Vincent van Gogh, post-impressionism, thick brushstrokes, swirling, characteristic signature style with distinctive aesthetic and brushwork
+by Rembrandt, Baroque, chiaroscuro, dramatic lighting, portrait, characteristic signature style with distinctive aesthetic and brushwork
 by Yoji Shinkawa, metal gear solid, ink wash, sketchy, action
-by Yoshitaka Amano, final fantasy, ethereal, watercolor, thin lines
-by Kentaro Miura, berserk, highly detailed ink, dark fantasy
-by Makoto Shinkai, anime, hyper-realistic backgrounds, glowing lighting
-by Banksy, street art, stencil, graffiti, political
-by Junji Ito, horror manga, intricate lines, disturbing, surreal
+by Yoshitaka Amano, final fantasy, ethereal, watercolor, thin lines, characteristic signature style with distinctive aesthetic and brushwork
+by Kentaro Miura, berserk, highly detailed ink, dark fantasy, characteristic signature style with distinctive aesthetic and brushwork
+by Makoto Shinkai, anime, hyper-realistic backgrounds, glowing lighting, characteristic signature style with distinctive aesthetic and brushwork
+by Banksy, street art, stencil, graffiti, political, characteristic signature style with distinctive aesthetic and brushwork
+by Junji Ito, horror manga, intricate lines, disturbing, surreal, characteristic signature style with distinctive aesthetic and brushwork
 by Tetsuya Nomura, final fantasy, belts, zippers, spiky hair, RPG
 by Masamune Shirow, cyberpunk, mecha, detailed, Ghost in the Shell
 by Akira Toriyama, dragon ball, anime, bulging muscles, clean lines
-by Eiichiro Oda, one piece, exaggerated expressions, dynamic
-by Norman Rockwell, americana, narrative, oil painting, warm
+by Eiichiro Oda, one piece, exaggerated expressions, dynamic, characteristic signature style with distinctive aesthetic and brushwork
+by Norman Rockwell, americana, narrative, oil painting, warm, characteristic signature style with distinctive aesthetic and brushwork
 by Frank Miller, sin city, high contrast, ink wash, noir
-by Todd McFarlane, spawn, comic art, heavy ink, dynamic
-by Jim Lee, comic books, detailed anatomy, crosshatching, dynamic
-by Alex Ross, painted comic art, realism, heroic, vibrant
-by Beksinski, dystopian, surreal, atmospheric, dark
-by Claude Monet, impressionism, water lilies, soft colors, light
-by Frida Kahlo, self portrait, surrealism, Mexican folklore, vibrant
-by Leonardo da Vinci, renaissance, sfumato, anatomical, oil
-by Michelangelo, Sistine chapel, muscular, classical, marble
-by Pablo Picasso, cubism, abstract, distorted, colorful
-by Rene Magritte, surrealism, bowler hat, clouds, thought-provoking
-by Wassily Kandinsky, abstract, geometric, vibrant, expressionist
-by Piet Mondrian, geometric, primary colors, grid, minimalist
-by Jackson Pollock, abstract expressionism, splatter paint, chaotic
+by Todd McFarlane, spawn, comic art, heavy ink, dynamic, characteristic signature style with distinctive aesthetic and brushwork
+by Jim Lee, comic books, detailed anatomy, crosshatching, dynamic, characteristic signature style with distinctive aesthetic and brushwork
+by Alex Ross, painted comic art, realism, heroic, vibrant, characteristic signature style with distinctive aesthetic and brushwork
+by Beksinski, dystopian, surreal, atmospheric, dark, characteristic signature style with distinctive aesthetic and brushwork
+by Claude Monet, impressionism, water lilies, soft colors, light, characteristic signature style with distinctive aesthetic and brushwork
+by Frida Kahlo, self portrait, surrealism, Mexican folklore, vibrant, characteristic signature style with distinctive aesthetic and brushwork
+by Leonardo da Vinci, renaissance, sfumato, anatomical, oil, characteristic signature style with distinctive aesthetic and brushwork
+by Michelangelo, Sistine chapel, muscular, classical, marble, characteristic signature style with distinctive aesthetic and brushwork
+by Pablo Picasso, cubism, abstract, distorted, colorful, characteristic signature style with distinctive aesthetic and brushwork
+by Rene Magritte, surrealism, bowler hat, clouds, thought-provoking, characteristic signature style with distinctive aesthetic and brushwork
+by Wassily Kandinsky, abstract, geometric, vibrant, expressionist, characteristic signature style with distinctive aesthetic and brushwork
+by Piet Mondrian, geometric, primary colors, grid, minimalist, characteristic signature style with distinctive aesthetic and brushwork
+by Jackson Pollock, abstract expressionism, splatter paint, chaotic, characteristic signature style with distinctive aesthetic and brushwork
 by Andy Warhol, pop art, screen printing, bright colors, celebrity
 by Roy Lichtenstein, pop art, comic style, ben-day dots, bold
-by Georgia O'Keeffe, flowers, desert, modernism, enlarged
-by Edward Hopper, realism, urban, lonely, diners, stark light
-by Gustav Klimt, symbolist, gold leaf, ornate, erotic, patterns
-Escher, optical illusion, tessellation, impossible geometry
+by Georgia O'Keeffe, flowers, desert, modernism, enlarged, characteristic signature style with distinctive aesthetic and brushwork
+by Edward Hopper, realism, urban, lonely, diners, stark light, characteristic signature style with distinctive aesthetic and brushwork
+by Gustav Klimt, symbolist, gold leaf, ornate, erotic, patterns, characteristic signature style with distinctive aesthetic and brushwork
+Escher, optical illusion, tessellation, impossible geometry, characteristic signature style with distinctive aesthetic and brushwork
 by Johannes Vermeer, dutch golden age, domestic, light through window
-by Sandro Botticelli, renaissance, flowing hair, mythological, tempera
-by Caravaggio, Baroque, chiaroscuro, dramatic, intense
-by Diego Rivera, muralist, social realism, large scale, colorful
-by Caspar David Friedrich, romanticism, fog, ruins, sublime landscape
-by Eugene Delacroix, romanticism, dynamic, dramatic, colorful
-by Gustave Dore, engraving, dark, detailed, epic, woodcut
-by Arthur Rackham, illustration, fairies, gnarled trees, ink, watercolor
-by Beatrix Potter, children's book, watercolor, animals, cozy
+by Sandro Botticelli, renaissance, flowing hair, mythological, tempera, characteristic signature style with distinctive aesthetic and brushwork
+by Caravaggio, Baroque, chiaroscuro, dramatic, intense, characteristic signature style with distinctive aesthetic and brushwork
+by Diego Rivera, muralist, social realism, large scale, colorful, characteristic signature style with distinctive aesthetic and brushwork
+by Caspar David Friedrich, romanticism, fog, ruins, sublime landscape, characteristic signature style with distinctive aesthetic and brushwork
+by Eugene Delacroix, romanticism, dynamic, dramatic, colorful, characteristic signature style with distinctive aesthetic and brushwork
+by Gustave Dore, engraving, dark, detailed, epic, woodcut, characteristic signature style with distinctive aesthetic and brushwork
+by Arthur Rackham, illustration, fairies, gnarled trees, ink, watercolor, characteristic signature style with distinctive aesthetic and brushwork
+by Beatrix Potter, children's book, watercolor, animals, cozy, characteristic signature style with distinctive aesthetic and brushwork
 by Maurice Sendak, wild things, pen and ink, crosshatching, whimsical
-Seuss, whimsical, cartoonish, imaginative, surreal
-by Ralph McQuarrie, star wars, concept art, sci-fi, painted
+Seuss, whimsical, cartoonish, imaginative, surreal, characteristic signature style with distinctive aesthetic and brushwork
+by Ralph McQuarrie, star wars, concept art, sci-fi, painted, characteristic signature style with distinctive aesthetic and brushwork
 by Syd Mead, futurist, sci-fi concept art, industrial design, glossy
-by Simon Stalenhag, retro sci-fi, nostalgic, narrative, landscape
-by Craig Mullins, digital painting, loose brushstrokes, concept art
-by Fenghua Zhong, dark fantasy, intricate, elegant, Chinese painting
-by Ruan Jia, impressionistic digital, color, light, fantasy
-by Artgerm, comic, anime, glossy, detailed portrait
-by WLOP, digital painting, ethereal, beautiful women, soft light
-by Krenz Cushart, anime, atmospheric, warm lighting, detailed
-by RossDraws, vibrant, colorful, fantasy, magical lighting
-by Sam Does Arts, anime, muted tones, stylized portrait
-by Reze, studio ghibli influence, cozy, detailed background
-by Sakimichan, anime, fanart, glossy skin, vibrant colors
-by Guweiz, dark, gritty, lone girl, cyberpunk, ink wash
-by Baku Makoto, vibrant, neon, cyberpunk, Japanese
-by Yoneyama Mai, vibrant colors, anime, intricate details, dynamic
-by Stanley Kubrick, symmetrical, wide angle, sterile, cinematic
-by Tim Burton, gothic, quirky, stop motion, dark, creepy
-by Wes Anderson, pastel, symmetrical, vintage, whimsical
-by Pixar, 3D, smooth, vibrant, expressive, subsurface scattering
-by Disney, classic, 2D animation, fairy tale, musical, soft
-by Masashi Kishimoto, naruto, dynamic ninja action, spiky hair
+by Simon Stalenhag, retro sci-fi, nostalgic, narrative, landscape, characteristic signature style with distinctive aesthetic and brushwork
+by Craig Mullins, digital painting, loose brushstrokes, concept art, characteristic signature style with distinctive aesthetic and brushwork
+by Fenghua Zhong, dark fantasy, intricate, elegant, Chinese painting, characteristic signature style with distinctive aesthetic and brushwork
+by Ruan Jia, impressionistic digital, color, light, fantasy, characteristic signature style with distinctive aesthetic and brushwork
+by Artgerm, comic, anime, glossy, detailed portrait, characteristic signature style with distinctive aesthetic and brushwork
+by WLOP, digital painting, ethereal, beautiful women, soft light, characteristic signature style with distinctive aesthetic and brushwork
+by Krenz Cushart, anime, atmospheric, warm lighting, detailed, characteristic signature style with distinctive aesthetic and brushwork
+by RossDraws, vibrant, colorful, fantasy, magical lighting, characteristic signature style with distinctive aesthetic and brushwork
+by Sam Does Arts, anime, muted tones, stylized portrait, characteristic signature style with distinctive aesthetic and brushwork
+by Reze, studio ghibli influence, cozy, detailed background, characteristic signature style with distinctive aesthetic and brushwork
+by Sakimichan, anime, fanart, glossy skin, vibrant colors, characteristic signature style with distinctive aesthetic and brushwork
+by Guweiz, dark, gritty, lone girl, cyberpunk, ink wash, characteristic signature style with distinctive aesthetic and brushwork
+by Baku Makoto, vibrant, neon, cyberpunk, Japanese, characteristic signature style with distinctive aesthetic and brushwork
+by Yoneyama Mai, vibrant colors, anime, intricate details, dynamic, characteristic signature style with distinctive aesthetic and brushwork
+by Stanley Kubrick, symmetrical, wide angle, sterile, cinematic, characteristic signature style with distinctive aesthetic and brushwork
+by Tim Burton, gothic, quirky, stop motion, dark, creepy, characteristic signature style with distinctive aesthetic and brushwork
+by Wes Anderson, pastel, symmetrical, vintage, whimsical, characteristic signature style with distinctive aesthetic and brushwork
+by Pixar, 3D, smooth, vibrant, expressive, subsurface scattering, characteristic signature style with distinctive aesthetic and brushwork
+by Disney, classic, 2D animation, fairy tale, musical, soft, characteristic signature style with distinctive aesthetic and brushwork
+by Masashi Kishimoto, naruto, dynamic ninja action, spiky hair, characteristic signature style with distinctive aesthetic and brushwork
 by Tite Kubo, bleach, sharp angles, black and white, modern fashion
 by Hirohiko Araki, jojo, bizarre adventure, vibrant fashion, dramatic poses
-by Kentaro Miura, berserk, hyper-detailed, dark fantasy, grotesque
+by Kentaro Miura, berserk, hyper-detailed, dark fantasy, grotesque, characteristic signature style with distinctive aesthetic and brushwork
+by Greg Manchess, portrait painter, oil on linen, dramatic lighting, americana
+by Bastien Lecouffe-Deharme, dark graphic novels, ink wash, heavy blacks, moody atmosphere
+by Dave McKean, mixed media illustration, surreal collages, dark atmospheric, painted textures
+by Ashley Wood, painterly comics, loose brushstrokes, muted tones, atmospheric horror
+by Jock, ink wash comic artist, gritty textures, bold silhouettes, urban noir
+by Sean Phillips, painted comic art, gritty realism, noir detective stories
+by Fiona Staples, fantasy comic painter, lush colors, clean linework, fantasy worlds
+by Ramón Pérez, retro illustration, golden age comic style, bright primary colors
+by Karla Ortiz, digital concept painter, soft cinematic lighting, painterly textures, fantasy
+by Bastien Vautrin, sci-fi concept art, moody neon lighting, futuristic megacities
+by Even Mehl Amundsen, painterly concept art, dynamic anatomy, atmospheric lighting, fantasy illustrations
+by Alex Konahin, digital illustration, grimdark atmosphere, painterly textures, dark fantasy scenes
+by Peter Mohrbacher, surreal cosmic horror illustration, angelic abstractions, psychedelic colors
+by Loish, vibrant digital portrait art, soft painterly style, colorful character illustrations
+by Kuroboshi Kouhaku, illustrator of Kino no Tabi, detailed mechanical backgrounds, melancholic atmosphere
+by Atey Ghailan, stylized character art, bold shapes, painterly rendering, dynamic compositions
+by Guillem H. Pongiluppi, fantasy illustration, dramatic lighting, painterly realism
+by Jonas De Ro, dark fantasy art, cinematic atmosphere, hyper-detailed environments and characters
+by Ruan Jia, Chinese digital painting, dreamlike fantasy landscapes, vibrant glowing lighting
+by Fenghua Zhong, traditional Chinese painting style, elegant brushwork, ethereal fantasy figures
+by Nicoletta Ceccoli, surreal doll-like illustration, pastel colors, childlike yet unsettling imagery
+by Krenz Cushart, anime illustration, warm golden hour lighting, dynamic character poses
+by Ross Tran RossDraws, vibrant painterly character art, bold colors, comic-book rendering style
+by Sam Yang, stylized anime portraiture, muted soft tones, single light source, dreamy atmosphere
+by Sakimichan, hyper-realistic digital art, glossy skin rendering, vibrant saturated colors
+by Guweiz, moody cyberpunk illustration, ink wash textures, lonely figure, neon city reflections
+by Stanley Artgerm Lau, comic book cover art, glossy rendering, dramatic lighting, beautiful figures
+by Genzoman, vibrant digital illustration, dynamic action poses, cinematic composition, comic art
+by Nikolai Lockertsen, fantasy digital painter, atmospheric lighting, moody epic scenes, brushwork
+by Raphael Lacoste, cinematic concept art, painterly realism, fantasy and sci-fi environments
+by Jean-Baptiste Monge, dark fairy tale illustration, intricate details, muted colors, gothic whimsy
+by Tomasz Alen Kopera, cinematic landscape painting, dramatic skies, fantasy realism, golden light
+by Andreas Rocha, fantasy realism illustration, dramatic scale, cinematic atmosphere, painterly
+by Jaime Jones, painterly fantasy art, bold simplified shapes, muted earthy palette, atmospheric
+by Jason A. Engle, dark fantasy painter, high contrast lighting, intricate details, epic compositions
+by Kekai Kotaki, painterly fantasy concept art, stylized environments, warm light and color harmony
+by Donato Giancola, oil painted sci-fi and fantasy, traditional techniques, dramatic narrative scenes
+by Justin Gerard, storybook illustration, watercolor and ink, whimsical fairy tale charm
+by Iris Compiet, dark fairy tale art, intricate ink work, fantasy creatures, muted vintage colors
+by Brian Froud, faerie fantasy illustration, intricate pencil and ink, mystical whimsical beings
+by Wayne Barlowe, surreal alien concept art, oil painted extraterrestrial biology, fantasy realism
+by Dave Dorman, sci-fi and fantasy painted illustrations, dramatic lighting, pulp adventure style
+by Keith Parkinson, classic fantasy oil painter, heroic figures, dramatic skies, nostalgic palette
+by Larry Elmore, classic Dungeons and Dragons illustration, painted fantasy realism, nostalgic charm
+by Clyde Caldwell, fantasy painted illustration, dramatic heroines, dynamic poses, rich color
+by Michael Whelan, iconic sci-fi and fantasy oil painter, dramatic skies, epic scale, painterly realism
+by John Howe, Tolkien illustrator, detailed ink and watercolor, epic fantasy landscapes, medieval
+by Alan Lee, Tolkien illustrator, soft watercolor, ethereal fantasy landscapes, medieval realism
+by Justin Sweet, fantasy architecture illustration, painted environments, moody lighting, concept art
+by Sparth, sci-fi environment concept art, painterly alien worlds, moody atmospheric lighting
+by Stephan Martiniere, sci-fi concept art, dramatic scale, painted alien megacities, atmospheric
+by Ash Thorp, dark conceptual illustrator, gritty sci-fi and fantasy, ink and digital mixed media
+by Marek Okon, fantasy illustration, painterly character art, dramatic lighting, heroic poses
+by Anna Podedworna, fantasy portrait painter, oil on board, classical realism, dramatic lighting
+by Bastien Lecouffe, dark comic book painter, moody color palette, ink wash texture, noir style
+by Ben Templesmith, horror comic artist, scratchy inks, dark atmospheric painted coloring, grotesque
+by Mike Mignola, comic book artist, bold black silhouettes, limited color palette, graphic composition
+by Tradd Moore, comic illustrator, dynamic distorted anatomy, ink wash, expressive action poses
+by Liam Sharp, painted comic art, realistic figures, cinematic composition, bold lighting
+by Andrea Mirt, fantasy painter, traditional oil techniques, mystical scenes, warm dramatic lighting
+by Chuck Pyle, illustrator, expressive watercolors, narrative scenes, vintage americana warmth
