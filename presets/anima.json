@@ -19,7 +19,11 @@
     "hr_scale": 1.5,
     "hr_second_pass_ratio": 0.5,
     "denoising_strength": 0.3,
-    "hr_additional_modules": ["Use same choices"]
+    "hr_additional_modules": ["Use same choices"],
+    "adetailer": [
+      {"ad_model": "person_yolov8s-seg.pt"},
+      {"ad_model": "face_yolov8n.pt"}
+    ]
   },
   "final_upscale": {
     "upscaler_1": "4x_NMKD-Superscale-SP_178000_G",

@@ -197,7 +197,13 @@ def build_txt2img_payload(
     })
     if hr:
         payload["enable_hr"] = True
-        payload.update(hr)
+        adetailer = _adetailer_alwayson(hr)
+        hr_for_payload = {k: v for k, v in hr.items() if k != "adetailer"}
+        payload.update(hr_for_payload)
+        if adetailer:
+            # ponytail: ADetailer va bajo alwayson_scripts; mezclar con lo que ya exista.
+            existing = payload.setdefault("alwayson_scripts", {})
+            existing["ADetailer"] = adetailer["ADetailer"]
     return payload
 
 
@@ -212,6 +218,16 @@ def build_hr_block(*, steps: int, settings=None) -> dict[str, Any]:
     ratio = block.pop("hr_second_pass_ratio", 0.5)
     block["hr_second_pass_steps"] = max(1, int(steps * ratio))
     return block
+
+
+def _adetailer_alwayson(hr_block: dict[str, Any]) -> dict[str, Any] | None:
+    """Convierte hr.adetailer (lista de {"ad_model": ...}) en el sub-objeto
+    alwayson_scripts.ADetailer que el backend A1111/Forge espera. None si no hay.
+    Apunta solo al HR Upscale porque build_hr_block es el único caller."""
+    entries = hr_block.get("adetailer") or []
+    if not entries:
+        return None
+    return {"ADetailer": {"args": [dict(e) for e in entries]}}
 
 
 def build_extra_payload(*, image_b64: str, settings=None) -> dict[str, Any]:

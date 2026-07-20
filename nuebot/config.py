@@ -54,6 +54,7 @@ _PRESET_FIELDS = {
     "hr": {
         "hr_upscaler", "hr_scale", "hr_second_pass_ratio",
         "denoising_strength", "hr_additional_modules",
+        "adetailer",
     },
     "final_upscale": {
         "upscaler_1", "upscaler_2", "extras_upscaler_2_visibility",
