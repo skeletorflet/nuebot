@@ -1,0 +1,35 @@
+{
+  "txt2img": {
+    "negative_prompt": "anthro, furry, text, english text, censored, deformed, blurry, watermark, greyscale, black and white, 3d, sepia, lowres, monochrome, grayscale, child, young, hand in pockets, shaved head, headband, tanlines, exposed breasts, cleavage, muscles",
+    "width": 832,
+    "height": 1216,
+    "steps": 30,
+    "cfg_scale": 5,
+    "sampler_name": "Euler a",
+    "scheduler": "SGM Uniform",
+    "seed": -1,
+    "batch_size": 1,
+    "n_iter": 4,
+    "save_images": false,
+    "send_images": true,
+    "do_not_save_grid": true
+  },
+  "hr": {
+    "hr_upscaler": "4x_NMKD-Superscale-SP_178000_G",
+    "hr_scale": 1.5,
+    "hr_second_pass_ratio": 0.5,
+    "denoising_strength": 0.3,
+    "hr_additional_modules": ["Use same choices"]
+  },
+  "final_upscale": {
+    "upscaler_1": "4x_NMKD-Superscale-SP_178000_G",
+    "upscaler_2": "None",
+    "extras_upscaler_2_visibility": 0.0,
+    "upscale_first": true,
+    "resize_mode": 0,
+    "show_extras_results": false,
+    "upscaling_resize": 3.0,
+    "upscaling_crop": false,
+    "upscaling_safer": false
+  }
+}
