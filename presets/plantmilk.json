@@ -22,7 +22,7 @@
     "hr_additional_modules": ["Use same choices"],
     "adetailer": [
       {"ad_model": "person_yolov8s-seg.pt"},
-      {"ad_model": "face_yolov8n.pt"}
+      {"ad_model": "face_yolov8s.pt"}
     ]
   },
   "final_upscale": {
