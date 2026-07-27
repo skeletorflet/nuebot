@@ -98,14 +98,23 @@ async def cmd_status(message: Message, jobs: JobManager) -> None:
 
 
 async def _enqueue_prompt(chat_id: int, raw: str, jobs: JobManager, user_message_id: int) -> Job:
-    text, had_wildcards = expand_resource_tokens(raw.strip())
+    # ponytail: prepender el prompt_prefix del preset ANTES de expandir
+    # wildcards. Los tokens r_* del usuario matchean por nombre, no por
+    # posición, así que prepender no rompe el matching. El booster va al
+    # frente del texto que verá el modelo (los primeros ~20 tokens cargan
+    # más peso en Illustrious/NoobAI/Pony).
+    settings = load_generation_settings()
+    raw_with_prefix = raw.strip()
+    if settings.prompt_prefix:
+        raw_with_prefix = f"{settings.prompt_prefix}, {raw_with_prefix}"
+    text, had_wildcards = expand_resource_tokens(raw_with_prefix)
     if not text or len(text.split()) < 3:
         raise ValueError("prompt demasiado corto")
     if len(text.encode("utf-8")) > MAX_PROMPT_BYTES:
         # ponytail: prompt expansion puede explotar el POST. Cap antes de
         # aceptar el job — el botón UPSCALE amplifica el costo en GPU.
         raise ValueError(f"prompt demasiado largo ({len(text)} chars)")
-    generation = load_generation_settings().txt2img
+    generation = settings.txt2img
     params = JobParams(
         prompt=text,
         negative_prompt=generation.negative_prompt,

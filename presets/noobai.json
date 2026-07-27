@@ -1,6 +1,7 @@
 {
   "txt2img": {
-    "negative_prompt": "worst quality, low quality, score_1, score_2, score_3, artist name, (bad hands:1.3), (extra fingers:1.3), (six fingers:1.4), fused fingers, missing fingers, deformed hands, mutated hands, bad anatomy, 2girls, 3girls, 4girls, 5girls, 6+girls, multiple girls, 2boys, 3boys, multiple boys, extra person, second female character, third female character, clone, duplicate, crowd, background character",
+    "prompt_prefix": "masterpiece, best quality, amazing quality, very aesthetic, very awa, absurdres, newest, depth of field, highres",
+    "negative_prompt": "worst quality, normal quality, low quality, anatomical nonsense, bad anatomy, (bad hands:1.3), (extra fingers:1.3), (six fingers:1.4), interlocked fingers, fused fingers, missing fingers, deformed hands, mutated hands, deformed, mutated, extra digits, fewer digits, blurry, lowres, jpeg artifacts, scan, watermark, simple background, transparent, logo, text, signature, username, artist name, censor, 2girls, 3girls, 4girls, 5girls, 6+girls, multiple girls, 2boys, 3boys, multiple boys, extra person, second female character, third female character, clone, duplicate, crowd, background character, face backlighting, backlighting",
     "width": 832,
     "height": 1216,
     "steps": 30,

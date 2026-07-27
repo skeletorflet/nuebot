@@ -69,6 +69,8 @@ async def _handle_job(job: Job, bot: Bot, sd: SDClient, jobs: JobManager) -> Non
         # un único POST con n_iter=4 repetiría la misma imagen 4 veces.
         # Sin wildcards, dejamos el comportamiento nativo (1 POST, n_iter
         # del preset, sólo varía el seed entre imágenes).
+        from .config import load_generation_settings as _lgs
+        settings_obj = _lgs()
         n_iter = int(generation.txt2img.n_iter or 1)
         variants = n_iter if (job.had_wildcards and n_iter > 1) else 1
         all_results: list[tuple[str, bytes, dict]] = []
@@ -78,7 +80,13 @@ async def _handle_job(job: Job, bot: Bot, sd: SDClient, jobs: JobManager) -> Non
             prompt_for_post = params.prompt
             if job.had_wildcards:
                 raw_prompt = job.raw_prompt or params.prompt
-                prompt_for_post, _ = expand_resource_tokens(raw_prompt)
+                prompt_for_post = raw_prompt
+                if settings_obj.prompt_prefix:
+                    # ponytail: el prefix se prependió al enqueue. Si lo
+                    # re-prependemos en cada variante y re-expandimos,
+                    # cada POST genera una elección random distinta.
+                    prompt_for_post = f"{settings_obj.prompt_prefix}, {prompt_for_post}"
+                prompt_for_post, _ = expand_resource_tokens(prompt_for_post)
             payload = build_txt2img_payload(
                 prompt=prompt_for_post,
                 negative_prompt=params.negative_prompt,

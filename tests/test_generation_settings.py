@@ -103,3 +103,100 @@ class GenerationSettingsTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class NoobAiPresetQualityPromptTests(unittest.TestCase):
+    """El preset noobai.json es One Obsession v23 (Illustrious-family).
+    Debe tener el prompt_prefix canónico y el negative del autor
+    (maxfeifei8) — sin esto las generaciones salen planas y con drift
+    multi-personaje."""
+
+    def setUp(self):
+        import json
+        self.preset = json.loads(
+            (Path(__file__).resolve().parents[1] / "presets" / "noobai.json").read_text(encoding="utf-8")
+        )
+
+    def test_has_prompt_prefix_with_illustrious_quality_stack(self):
+        prefix = self.preset["txt2img"].get("prompt_prefix", "")
+        for tag in ("masterpiece", "best quality", "amazing quality", "very aesthetic"):
+            self.assertIn(tag, prefix, msg=f"prefix Illustrious debe incluir {tag!r}")
+
+    def test_negative_blocks_multi_character_and_anatomy(self):
+        neg = self.preset["txt2img"]["negative_prompt"]
+        for tag in ("2girls", "multiple girls", "extra person", "bad anatomy",
+                     "extra fingers", "watermark", "face backlighting"):
+            self.assertIn(tag, neg, msg=f"negative debe bloquear {tag!r}")
+
+    def test_does_not_use_pony_score_block(self):
+        # Pony's score_9, score_8_up es contraproducente en Illustrious.
+        prefix = self.preset["txt2img"].get("prompt_prefix", "")
+        for tag in ("score_9", "score_8_up", "score_7_up"):
+            self.assertNotIn(tag, prefix, msg=f"Illustrious no usa {tag!r}")
+
+
+class PromptPrefixTests(unittest.IsolatedAsyncioTestCase):
+    """El preset puede inyectar un prompt_prefix. _enqueue_prompt lo
+    prepende al raw antes de expandir wildcards."""
+
+    async def test_prefix_is_prepended_before_wildcards(self):
+        from nuebot.handlers.generate import _enqueue_prompt
+        from nuebot.config import GenerationSettings, GenerationBlock, BotConfig
+        import nuebot.config as cfg_mod
+
+        prefix = "masterpiece, best quality, amazing quality"
+        fake_settings = GenerationSettings(
+            bot=BotConfig(),
+            txt2img=GenerationBlock(negative_prompt="x", steps=20, cfg_scale=1,
+                                     sampler_name="Euler a", scheduler="Simple"),
+            hr={},
+            final_upscale={},
+            prompt_prefix=prefix,
+        )
+        captured = {}
+
+        class _FakeJobs:
+            def enqueue(self, job):
+                captured["job"] = job
+                return 1
+
+        orig = cfg_mod._settings
+        cfg_mod._settings = fake_settings
+        try:
+            await _enqueue_prompt(1, "tres palabras r_female aqui", _FakeJobs(), 1)
+        finally:
+            cfg_mod._settings = orig
+
+        job = captured["job"]
+        self.assertTrue(job.prompt.startswith(prefix + ","))
+        # El wildcard se expandió aunque estaba después del prefix
+        self.assertNotIn("r_female", job.prompt)
+
+    async def test_no_prefix_keeps_old_behavior(self):
+        from nuebot.handlers.generate import _enqueue_prompt
+        from nuebot.config import GenerationSettings, GenerationBlock, BotConfig
+        import nuebot.config as cfg_mod
+
+        fake_settings = GenerationSettings(
+            bot=BotConfig(),
+            txt2img=GenerationBlock(negative_prompt="x", steps=20, cfg_scale=1,
+                                     sampler_name="Euler a", scheduler="Simple"),
+            hr={},
+            final_upscale={},
+            prompt_prefix=None,
+        )
+        captured = {}
+
+        class _FakeJobs:
+            def enqueue(self, job):
+                captured["job"] = job
+                return 1
+
+        orig = cfg_mod._settings
+        cfg_mod._settings = fake_settings
+        try:
+            await _enqueue_prompt(1, "tres palabras aqui nomas", _FakeJobs(), 1)
+        finally:
+            cfg_mod._settings = orig
+
+        self.assertTrue(captured["job"].prompt.startswith("tres palabras"))

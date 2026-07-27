@@ -42,6 +42,12 @@ class GenerationSettings(BaseModel):
     # adicionales (VAE, text encoder, etc.) y garantizar que coincidan con el
     # preset activo.
     post_options: dict[str, Any] | None = None
+    # ponytail: prepended al prompt positivo antes de expandir wildcards.
+    # Útil para presets Illustrious/Pony/NoobAI donde el booster de calidad
+    # (``masterpiece, best quality, amazing quality, very aesthetic,
+    # absurdres, newest``) debe ir al frente para tener peso. Si el user ya
+    # lo escribió, queda duplicado y el modelo lo ignora (no stacking).
+    prompt_prefix: str | None = None
 
 
 _settings: GenerationSettings | None = None
