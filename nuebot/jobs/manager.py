@@ -277,6 +277,9 @@ class JobManager:
         path = self._cache_dir / f"{task_id}.json"
         try:
             raw = json.loads(path.read_text(encoding="utf-8"))
+            # ponytail: validación pydantic al leer cache. Si el JSON está
+            # corrupto o manipulado, devolver None es más seguro que dejar
+            # que un campo con tipo incorrecto llegue al handler.
             params = JobParams(**raw)
         except (OSError, json.JSONDecodeError, TypeError, ValueError):
             return None

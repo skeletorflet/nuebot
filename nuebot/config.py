@@ -52,11 +52,12 @@ _PRESET_FIELDS = {
         "save_images", "send_images", "do_not_save_grid",
     },
     "hr": {
-        "hr_upscaler", "hr_scale", "hr_second_pass_ratio",
-        "denoising_strength", "hr_additional_modules",
-        "adetailer",
-    },
-    "final_upscale": {
+            "hr_upscaler", "hr_scale", "hr_second_pass_ratio",
+            "denoising_strength", "hr_additional_modules",
+            # ponytail: adetailer es opcional — preset sin ADetailer (e.g. krea2)
+            # no necesita declararlo. El handler lo trata como lista vacía.
+        },
+        "final_upscale": {
         "upscaler_1", "upscaler_2", "extras_upscaler_2_visibility",
         "upscale_first", "resize_mode", "show_extras_results",
         "upscaling_resize", "upscaling_crop", "upscaling_safer",

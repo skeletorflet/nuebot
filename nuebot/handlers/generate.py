@@ -19,6 +19,11 @@ from ..jobs.manager import Job, JobManager, JobParams, new_task_id
 router = Router(name="generate")
 RESOURCES_DIR = Path(__file__).resolve().parents[2] / "resources"
 
+# ponytail: cap al prompt expandido. {a|b|...} con cientos de stems
+# puede explotar el POST /txt2img y disparar UPSCALE-amplification DoS.
+# 8KB cubre prompts normales (cientos de palabras) con margen.
+MAX_PROMPT_BYTES = 8 * 1024
+
 
 def expand_resource_tokens(prompt: str, resources_dir: Path = RESOURCES_DIR) -> str:
     """Reemplaza cada token con stem de *.txt por una línea aleatoria no vacía."""
@@ -70,6 +75,10 @@ async def _enqueue_prompt(chat_id: int, raw: str, jobs: JobManager, user_message
     text = expand_resource_tokens(raw.strip())
     if not text or len(text.split()) < 3:
         raise ValueError("prompt demasiado corto")
+    if len(text.encode("utf-8")) > MAX_PROMPT_BYTES:
+        # ponytail: prompt expansion puede explotar el POST. Cap antes de
+        # aceptar el job — el botón UPSCALE amplifica el costo en GPU.
+        raise ValueError(f"prompt demasiado largo ({len(text)} chars)")
     generation = load_generation_settings().txt2img
     params = JobParams(
         prompt=text,
@@ -108,5 +117,14 @@ async def free_text_to_prompt(message: Message, jobs: JobManager) -> None:
         return
     try:
         await _enqueue_prompt(message.chat.id, raw, jobs, message.message_id)
-    except ValueError:
-        await message.answer("Mandame un prompt de al menos 3 palabras.")
+    except ValueError as e:
+        # ponytail: distinguimos el cap del prompt del check de palabras.
+        # Misma respuesta corta que antes, no escupimos detalles técnicos.
+        msg = str(e)
+        if "demasiado largo" in msg:
+            await message.answer(
+                "El prompt (con sus expansiones) quedó demasiado largo. "
+                "Probá con menos tokens o menos palabras."
+            )
+        else:
+            await message.answer("Mandame un prompt de al menos 3 palabras.")

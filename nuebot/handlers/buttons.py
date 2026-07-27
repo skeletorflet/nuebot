@@ -84,16 +84,24 @@ _PARAM_SEP = "\x1f"
 PARAM_PREFIX = "⚙ "
 
 
-def format_caption(task_id: str, kind_label: str, params: JobParams) -> str:
+def format_caption(task_id: str, kind_label: str, params: JobParams, *, variant: str | None = None) -> str:
     """Formato de documento del screenshot.
 
     El estado completo se guarda en JobManager (RAM + JSON). No agregamos el
     bloque técnico al caption porque el usuario pidió un mensaje limpio como
     el screenshot; el parser de abajo queda para botones de mensajes viejos.
+
+    ``variant`` ("2/4", "3/4", etc) se prepende al head cuando n_iter>1 —
+    así el usuario sabe que cada doc es una variante del mismo job.
     """
     width = params.display_width or params.width
     height = params.display_height or params.height
-    head = "✅ 🎨 Generación completada\n📝 Prompt:\n"
+    head = "✅ 🎨 Generación completada"
+    if variant:
+        # ponytail: n_iter>1 manda varias imágenes. La variante va en el head
+        # para que se vea de un vistazo antes del prompt largo.
+        head = f"{head} · Variante {variant}"
+    head = f"{head}\n📝 Prompt:\n"
     config = (
         "⚙️ Configuración:\n"
         f"• Pasos: {params.steps}\n"

@@ -253,3 +253,86 @@ class SDClientProgressMethodTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ApoptosisTests(unittest.IsolatedAsyncioTestCase):
+    """Si progress no avanza por _STUCK_TICKS ticks y job_count>0, el editor
+    llama sd.interrupt() y marca el mensaje como 'sin avance'."""
+
+    async def test_apoptosis_fires_after_stuck_ticks(self):
+        from nuebot.jobs.progress_reporter import ProgressEditor, _STUCK_TICKS
+
+        sd = MagicMock()
+        sd.progress = AsyncMock(return_value={
+            "progress": 0.42,
+            "eta_relative": 30.0,
+            "state": {"job_count": 1, "sampling_step": 10, "sampling_steps": 28},
+        })
+        sd.interrupt = AsyncMock()
+
+        bot = MagicMock()
+        bot.edit_message_text = AsyncMock()
+
+        editor = ProgressEditor(
+            bot=bot, chat_id=1, status_message_id=42,
+            label="🎨 x", sd=sd, interval=0.001,
+        )
+        # Forzamos el threshold a un valor chiquito para que el test sea rápido.
+        from nuebot.jobs import progress_reporter as pr_mod
+        original_stuck = pr_mod._STUCK_TICKS
+        pr_mod._STUCK_TICKS = 3
+        try:
+            # Run breve en task; cancelamos al primer apoptosis.
+            task = asyncio.create_task(editor.run())
+            # Esperamos ticks suficientes para que apoptosis dispare.
+            for _ in range(50):
+                if sd.interrupt.called:
+                    break
+                await asyncio.sleep(0.01)
+            editor.request_stop()
+            try:
+                await asyncio.wait_for(task, timeout=1.0)
+            except asyncio.TimeoutError:
+                task.cancel()
+        finally:
+            pr_mod._STUCK_TICKS = original_stuck
+
+        sd.interrupt.assert_awaited()
+        # El último edit debe contener "sin avance"
+        last_call = bot.edit_message_text.call_args_list[-1]
+        sent_text = last_call.kwargs.get("text") or last_call.args[-1]
+        self.assertIn("sin avance", sent_text)
+
+    async def test_no_apoptosis_when_progress_advances(self):
+        from nuebot.jobs.progress_reporter import ProgressEditor
+        sd = MagicMock()
+        progresses = iter([
+            {"progress": 0.1, "state": {"job_count": 1}},
+            {"progress": 0.2, "state": {"job_count": 1}},
+            {"progress": 0.3, "state": {"job_count": 1}},
+            {"progress": 0.4, "state": {"job_count": 1}},
+            {"progress": 0.5, "state": {"job_count": 1}},
+            {"progress": 1.0, "state": {"job_count": 0}},
+        ])
+        async def _next_p():
+            try:
+                return next(progresses)
+            except StopIteration:
+                return {"progress": 1.0, "state": {"job_count": 0}}
+        sd.progress = AsyncMock(side_effect=_next_p)
+        sd.interrupt = AsyncMock()
+        bot = MagicMock()
+        bot.edit_message_text = AsyncMock()
+
+        editor = ProgressEditor(
+            bot=bot, chat_id=1, status_message_id=42,
+            label="🎨 x", sd=sd, interval=0.001,
+        )
+        task = asyncio.create_task(editor.run())
+        await asyncio.sleep(0.05)
+        editor.request_stop()
+        try:
+            await asyncio.wait_for(task, timeout=1.0)
+        except asyncio.TimeoutError:
+            task.cancel()
+        sd.interrupt.assert_not_called()

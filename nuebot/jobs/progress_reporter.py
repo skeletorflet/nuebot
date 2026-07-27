@@ -45,6 +45,11 @@ BAR_FULL = "█"
 BAR_EMPTY = "░"
 _BAR_LEN = 20
 
+# ponytail: apoptosis threshold. Si job_count>0 y progress no avanza por
+# esta cantidad de ticks, asumimos stuck e interrumpimos. 5 × 3s = 15s,
+# margen suficiente para que un run real avance varios %.
+_STUCK_TICKS = 5
+
 
 def _bar(percent: int) -> str:
     """Devuelve "████████░░░░░░░░░░░░ 40%" para visualización."""
@@ -142,6 +147,13 @@ class ProgressEditor:
         # Controla el primer poll: si el SD todavía está en job_count == 0
         # (no empezó a generar todavía, p.ej. cargando modelo) no pisamos
         # el "Generando..." inicial en las primeras iteraciones.
+        # ponytail: apoptosis. Si el SD reporta job_count>0 pero el percent
+        # global no avanza por _STUCK_TICKS ticks seguidos, asumimos que se
+        # colgó (modelo swappeando, VRAM OOM, etc) y disparamos interrupt().
+        # 5 ticks × 3s = 15s de gracia — un run real siempre avanzó varios %.
+        self._last_progress: float = -1.0
+        self._stuck_ticks: int = 0
+        self._apoptosis_done: bool = False
 
     def request_stop(self) -> None:
         """Marca para que el loop cierre solo. Idempotente."""
@@ -175,6 +187,25 @@ class ProgressEditor:
             job_count = int(state.get("job_count") or 0)
             if job_count > 0:
                 first_seen_running = True
+
+            # ponytail: apoptosis. Si está corriendo y el % global no se mueve
+            # por N ticks seguidos, lo matamos y dejamos el texto listo.
+            if first_seen_running and not self._apoptosis_done:
+                current_progress = float(progress.get("progress") or 0.0)
+                if self._last_progress >= 0.0 and current_progress <= self._last_progress:
+                    self._stuck_ticks += 1
+                else:
+                    self._stuck_ticks = 0
+                self._last_progress = current_progress
+                if self._stuck_ticks >= _STUCK_TICKS:
+                    try:
+                        await self._sd.interrupt()
+                    except Exception as e:  # noqa: BLE001
+                        _log.debug("apoptosis interrupt falló: %s", e)
+                    await self._safe_edit(f"{self._label}\n❌ sin avance — cancelado")
+                    self._apoptosis_done = True
+                    self._stopped.set()
+                    break
 
             if first_seen_running:
                 text = _format_progress(

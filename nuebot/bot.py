@@ -73,8 +73,12 @@ async def _handle_job(job: Job, bot: Bot, sd: SDClient, jobs: JobManager) -> Non
         )
         result = await sd.txt2img(payload, payload_init=payload)
         from aiogram.types import BufferedInputFile
+        total = len(result.images_b64)
+        # ponytail: n_iter del preset (e.g. anima=4) ya genera varias imágenes.
+        # Antes solo el index 0 llevaba botones; las demás quedaban huérfanas.
+        # Ahora cada variante tiene su task_id, su cache y sus botones.
         for index, img_b64 in enumerate(result.images_b64):
-            result_id = job.task_id if index == 0 else new_task_id()
+            result_id = new_task_id()
             png = base64.b64decode(img_b64)
             filename = f"{result_id}_txt2img.png"
             (DATA_DIR / filename).write_bytes(png)
@@ -83,10 +87,14 @@ async def _handle_job(job: Job, bot: Bot, sd: SDClient, jobs: JobManager) -> Non
             jobs.remember(result_id, result_params)
 
             document = BufferedInputFile(png, filename=filename)
+            caption = buttons.format_caption(
+                result_id, "txt2img", result_params,
+                variant=f"{index + 1}/{total}" if total > 1 else None,
+            )
             await bot.send_document(
                 job.chat_id,
                 document=document,
-                caption=buttons.format_caption(result_id, "txt2img", result_params),
+                caption=caption,
                 reply_markup=buttons.kb_txt2img(result_id),
             )
 

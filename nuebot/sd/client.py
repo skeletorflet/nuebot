@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -40,6 +41,11 @@ class Txt2ImgResult:
 
 
 _log = logging.getLogger("nuebot.sd")
+
+# ponytail: gatea los write_text() de debug en el hot path. Con NUEBOT_DEBUG=1
+# se mantienen para inspección post-mortem; sin ella, el asyncio loop no
+# paga I/O blocking por cada txt2img (payloads de hasta ~5MB).
+_DEBUG_ENABLED = os.environ.get("NUEBOT_DEBUG") == "1"
 
 
 def _stable_signature(payload: dict[str, Any]) -> tuple:
@@ -71,11 +77,15 @@ class SDClient:
         await self._client.aclose()
 
     def _write_debug_json(self, filename: str, data: Any) -> None:
-        self._debug_dir.mkdir(parents=True, exist_ok=True)
-        (self._debug_dir / filename).write_text(
-            json.dumps(data, ensure_ascii=False, indent=2),
-            encoding="utf-8",
-        )
+            # ponytail: gating. Default off — el hot path no paga I/O por debug.
+            # Override con NUEBOT_DEBUG=1 si necesitás inspeccionar payloads.
+            if not _DEBUG_ENABLED:
+                return
+            self._debug_dir.mkdir(parents=True, exist_ok=True)
+            (self._debug_dir / filename).write_text(
+                json.dumps(data, ensure_ascii=False, indent=2),
+                encoding="utf-8",
+            )
 
     async def health(self) -> dict[str, Any]:
         """GET /sdapi/v1/options. Lanza SDError si el endpoint no responde JSON."""

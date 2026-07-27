@@ -94,20 +94,28 @@ class DocumentResultTests(unittest.TestCase):
         self.assertLessEqual(len(caption), 1024)
 
     def test_debug_files_keep_initial_final_payload_and_api_result_together(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            client = SDClient.__new__(SDClient)
-            client._debug_dir = Path(tmp) / "debug"
-            client._write_debug_json("payload_init.json", {"prompt": "cute cat nose", "steps": 4})
-            client._write_debug_json("payload_final.json", {"prompt": "cute cat nose", "steps": 4, "seed": -1})
-            client._write_debug_json("resultado.json", {"info": "real seed 2418682888", "images": ["png-b64"]})
+            with tempfile.TemporaryDirectory() as tmp:
+                client = SDClient.__new__(SDClient)
+                client._debug_dir = Path(tmp) / "debug"
+                # ponytail: los debug JSON viven detrás de NUEBOT_DEBUG. El test
+                # los quiere ejercitar igual → forzamos el flag para este scope.
+                from nuebot.sd import client as _sd_mod
+                saved = _sd_mod._DEBUG_ENABLED
+                _sd_mod._DEBUG_ENABLED = True
+                try:
+                    client._write_debug_json("payload_init.json", {"prompt": "cute cat nose", "steps": 4})
+                    client._write_debug_json("payload_final.json", {"prompt": "cute cat nose", "steps": 4, "seed": -1})
+                    client._write_debug_json("resultado.json", {"info": "real seed 2418682888", "images": ["png-b64"]})
+                finally:
+                    _sd_mod._DEBUG_ENABLED = saved
 
-            debug = client._debug_dir
-            self.assertEqual(json.loads((debug / "payload_init.json").read_text(encoding="utf-8"))["steps"], 4)
-            self.assertEqual(json.loads((debug / "payload_final.json").read_text(encoding="utf-8"))["seed"], -1)
-            self.assertEqual(
-                json.loads((debug / "resultado.json").read_text(encoding="utf-8"))["info"],
-                "real seed 2418682888",
-            )
+                debug = client._debug_dir
+                self.assertEqual(json.loads((debug / "payload_init.json").read_text(encoding="utf-8"))["steps"], 4)
+                self.assertEqual(json.loads((debug / "payload_final.json").read_text(encoding="utf-8"))["seed"], -1)
+                self.assertEqual(
+                    json.loads((debug / "resultado.json").read_text(encoding="utf-8"))["info"],
+                    "real seed 2418682888",
+                )
 
 
 class PostOptionsTests(unittest.IsolatedAsyncioTestCase):
