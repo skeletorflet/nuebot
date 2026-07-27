@@ -134,6 +134,11 @@ class Job:
     user_message_id: int | None = None
     # Prompt crudo del usuario (pre-resource-expansion). Para REINTENTAR tras falla.
     raw_prompt: str | None = None
+    # ponytail: True si expand_resource_tokens resolvió al menos un wildcard
+    # del usuario (r_female, r_male, etc) o un {a|b|c} literal. El handler
+    # usa esto para hacer N POSTs con prompts distintos; sin esto n_iter=4
+    # repetiría la misma imagen 4 veces (A1111 no randomiza por iteración).
+    had_wildcards: bool = False
     # Lo que tenía que hacer (txt2img | hires | final). Solo txt2img se encola
     # desde el usuario; los demás los dispara el handler de botones directamente.
     kind: str = "txt2img"

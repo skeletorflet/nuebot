@@ -190,7 +190,9 @@ class ProgressEditor:
 
             # ponytail: apoptosis. Si está corriendo y el % global no se mueve
             # por N ticks seguidos, lo matamos y dejamos el texto listo.
-            if first_seen_running and not self._apoptosis_done:
+            # Si job_count==0 el SD ya terminó (o está entre jobs) — no es
+            # stuck, es estado terminal.
+            if first_seen_running and not self._apoptosis_done and job_count > 0:
                 current_progress = float(progress.get("progress") or 0.0)
                 if self._last_progress >= 0.0 and current_progress <= self._last_progress:
                     self._stuck_ticks += 1

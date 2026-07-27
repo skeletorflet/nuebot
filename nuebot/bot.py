@@ -59,31 +59,58 @@ async def _handle_job(job: Job, bot: Bot, sd: SDClient, jobs: JobManager) -> Non
         from .sd.client import build_txt2img_payload
         generation = load_generation_settings()
         await sd.post_options(generation.post_options)
-        payload = build_txt2img_payload(
-            prompt=params.prompt,
-            negative_prompt=params.negative_prompt,
-            width=params.width,
-            height=params.height,
-            steps=params.steps,
-            cfg_scale=params.cfg_scale,
-            sampler=params.sampler,
-            scheduler=params.scheduler,
-            seed=params.seed,
-            settings=generation,
-        )
-        result = await sd.txt2img(payload, payload_init=payload)
+
         from aiogram.types import BufferedInputFile
-        total = len(result.images_b64)
-        # ponytail: n_iter del preset (e.g. anima=4) ya genera varias imágenes.
-        # Antes solo el index 0 llevaba botones; las demás quedaban huérfanas.
-        # Ahora cada variante tiene su task_id, su cache y sus botones.
-        for index, img_b64 in enumerate(result.images_b64):
+        from .handlers.generate import expand_resource_tokens
+
+        # ponytail: si el prompt traía wildcards (r_female, r_male, o
+        # {a|b|c} literal) y el preset tiene n_iter>1, mandamos N POSTs
+        # con prompts independientes. A1111 NO randomiza por iteración —
+        # un único POST con n_iter=4 repetiría la misma imagen 4 veces.
+        # Sin wildcards, dejamos el comportamiento nativo (1 POST, n_iter
+        # del preset, sólo varía el seed entre imágenes).
+        n_iter = int(generation.txt2img.n_iter or 1)
+        variants = n_iter if (job.had_wildcards and n_iter > 1) else 1
+        all_results: list[tuple[str, bytes, dict]] = []
+        for variant_index in range(variants):
+            # Re-expandimos fresh en cada POST: cada variante debe ser
+            # distinta. Si no hay wildcards esto es no-op (mismo prompt).
+            prompt_for_post = params.prompt
+            if job.had_wildcards:
+                raw_prompt = job.raw_prompt or params.prompt
+                prompt_for_post, _ = expand_resource_tokens(raw_prompt)
+            payload = build_txt2img_payload(
+                prompt=prompt_for_post,
+                negative_prompt=params.negative_prompt,
+                width=params.width,
+                height=params.height,
+                steps=params.steps,
+                cfg_scale=params.cfg_scale,
+                sampler=params.sampler,
+                scheduler=params.scheduler,
+                seed=-1,  # cada POST con seed fresco
+                n_iter=1,  # variantes vienen del outer loop
+                settings=generation,
+            )
+            result = await sd.txt2img(payload, payload_init=payload)
+            for index, img_b64 in enumerate(result.images_b64):
+                all_results.append((prompt_for_post, base64.b64decode(img_b64), result.info_json))
+
+        total = len(all_results)
+        for index, (used_prompt, png, info_json) in enumerate(all_results):
+            if getattr(job, "_cancelled", False):
+                break
             result_id = new_task_id()
-            png = base64.b64decode(img_b64)
             filename = f"{result_id}_txt2img.png"
             (DATA_DIR / filename).write_bytes(png)
 
-            result_params = apply_result_info(params, result.info_json, index)
+            # Si expandimos para esta variante, persistimos el prompt final
+            # para que Repetir conserve esa versión específica.
+            variant_params = params
+            if used_prompt != params.prompt:
+                from dataclasses import replace
+                variant_params = replace(params, prompt=used_prompt)
+            result_params = apply_result_info(variant_params, info_json, index)
             jobs.remember(result_id, result_params)
 
             document = BufferedInputFile(png, filename=filename)

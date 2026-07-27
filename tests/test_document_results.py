@@ -255,7 +255,7 @@ class MultipleDocumentResultTests(unittest.IsolatedAsyncioTestCase):
         bot = FakeBot()
 
         generation = SimpleNamespace(
-            txt2img=SimpleNamespace(model_dump=lambda: {}),
+            txt2img=SimpleNamespace(model_dump=lambda: {}, n_iter=4),
             post_options=None,
         )
         with (

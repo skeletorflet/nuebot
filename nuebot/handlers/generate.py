@@ -25,18 +25,44 @@ RESOURCES_DIR = Path(__file__).resolve().parents[2] / "resources"
 MAX_PROMPT_BYTES = 8 * 1024
 
 
-def expand_resource_tokens(prompt: str, resources_dir: Path = RESOURCES_DIR) -> str:
-    """Reemplaza cada token con stem de *.txt por una línea aleatoria no vacía."""
+def expand_resource_tokens(
+    prompt: str, resources_dir: Path = RESOURCES_DIR
+) -> tuple[str, bool]:
+    """Reemplaza cada token ``<stem>`` por UNA línea random del archivo
+    ``<stem>.txt``. Devuelve (prompt_expandido, tuvo_wildcards).
+
+    Importante: NO generamos sintaxis ``{a|b|c}`` porque A1111/Forge la
+    trata como literal — no randomiza por iteración ni por batch. Si
+    queremos N imágenes distintas necesitamos N POSTs separados, cada
+    uno con un ``random.choice`` independiente. El flag ``tuvo_wildcards``
+    lo consume el handler para clonar el job N veces.
+    """
+    tuvo = False
     for path in resources_dir.glob("*.txt"):
         if not re.search(rf"(?<!\w){re.escape(path.stem)}(?!\w)", prompt):
             continue
         lines = list(dict.fromkeys(
             line.strip() for line in path.read_text(encoding="utf-8").splitlines() if line.strip()
         ))
-        if lines:
-            options = "{" + "|".join(random.sample(lines, min(12, len(lines)))) + "}"
-            prompt = re.sub(rf"(?<!\w){re.escape(path.stem)}(?!\w)", lambda _: options, prompt)
-    return prompt
+        if not lines:
+            continue
+        pick = random.choice(lines)
+        tuvo = True
+        prompt = re.sub(rf"(?<!\w){re.escape(path.stem)}(?!\w)", lambda _: pick, prompt)
+    # ponytail: si el user tipeó ``{a|b|c}`` literal, lo evaluamos acá
+    # también. No queremos mandarle al SD llaves literales.
+    pattern = re.compile(r"\{([^{}]*)\}")
+    while True:
+        m = pattern.search(prompt)
+        if not m:
+            break
+        opts = [o.strip() for o in m.group(1).split("|") if o.strip()]
+        if not opts:
+            prompt = prompt[: m.start()] + prompt[m.end():]
+            continue
+        prompt = prompt[: m.start()] + random.choice(opts) + prompt[m.end():]
+        tuvo = True
+    return prompt, tuvo
 
 
 def _is_authorized(user_id: int) -> bool:
@@ -72,7 +98,7 @@ async def cmd_status(message: Message, jobs: JobManager) -> None:
 
 
 async def _enqueue_prompt(chat_id: int, raw: str, jobs: JobManager, user_message_id: int) -> Job:
-    text = expand_resource_tokens(raw.strip())
+    text, had_wildcards = expand_resource_tokens(raw.strip())
     if not text or len(text.split()) < 3:
         raise ValueError("prompt demasiado corto")
     if len(text.encode("utf-8")) > MAX_PROMPT_BYTES:
@@ -100,6 +126,7 @@ async def _enqueue_prompt(chat_id: int, raw: str, jobs: JobManager, user_message
         params=params,
         user_message_id=user_message_id,
         raw_prompt=raw.strip(),
+        had_wildcards=had_wildcards,
     )
     jobs.enqueue(job)
     return job
