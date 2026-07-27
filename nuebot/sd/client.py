@@ -1,11 +1,16 @@
 """Cliente async de Stable Diffusion WebUI (A1111 / Forge).
 
 Cubre lo único que usa el bot:
-  - POST /sdapi/v1/txt2img           (con o sin enable_hr)
+  - POST /sdapi/v1/txt2img            (con o sin enable_hr)
   - POST /sdapi/v1/extra-single-image (Upscale Final)
   - POST /sdapi/v1/interrupt          (cancelar job en GPU)
   - POST /sdapi/v1/options            (aplica preset antes de generar)
   - GET  /sdapi/v1/options            (health)
+  - GET  /sdapi/v1/progress?skip_current_image=true (polling de progreso;
+      skip_current_image=true evita que el SD nos devuelva la imagen en
+      cada tick, que duplica trabajo del encoder. No es la imagen
+      final: el campo `state.sampling_step` / `state.sampling_steps`
+      sigue presente para mostrar "step N/M" en el mensaje del bot.)
 
 Notas de quirks del WebUI (jul 2026):
   - txt2img devuelve data["images"] como lista de b64.
@@ -80,6 +85,42 @@ class SDClient:
             return r.json()
         except ValueError as e:
             raise SDError(f"GET /options no devolvió JSON ({r.headers.get('content-type')}): {e}") from e
+
+    async def progress(self) -> dict[str, Any]:
+        """GET /sdapi/v1/progress?skip_current_image=true.
+
+        Devuelve ``{"progress": float, "eta_relative": float,
+        "state": {"sampling_step": int, "sampling_steps": int,
+        "job_count": int, "job_no": int, "textinfo": str,
+        "interrupted": bool, "skipped": bool, "current_task": str},
+        "current_image": None, "textinfo": str}``.
+
+        Importante:
+          - Cuando hay ``enable_hr=True`` el counter vuelve a 0 entre el
+            primer pass y el HR pass: por eso NO usamos ``progress`` como
+            "ya casi termina" sino como percent global del run en curso.
+          - ``skip_current_image=true`` ahorra CPU del encoder en cada tick
+            (SD no reconstruye la imagen preview cada vez).
+          - El caller debe tolerar timeouts: el endpoint puede colgarse
+            si el SD está swap de modelo. Por eso timeout corto y una sola
+            excepción -> dejamos el último texto y seguimos.
+        """
+        # ponytail: timeout corto. Si el SD está ocupado cargando modelo,
+        # el endpoint puede colgarse; preferimos un tick perdido a bloquear
+        # el editor de progreso.
+        try:
+            r = await self._client.get(
+                "/sdapi/v1/progress",
+                params={"skip_current_image": "true"},
+                timeout=httpx.Timeout(5.0, connect=3.0),
+            )
+        except httpx.TimeoutException:
+            return {}
+        r.raise_for_status()
+        try:
+            return r.json()
+        except ValueError:
+            return {}
 
     async def post_options(self, payload: dict[str, Any] | None) -> None:
         """POST /sdapi/v1/options. Aplica el preset antes de cada generación.

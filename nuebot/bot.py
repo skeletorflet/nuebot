@@ -40,6 +40,21 @@ async def _handle_job(job: Job, bot: Bot, sd: SDClient, jobs: JobManager) -> Non
     status = await bot.send_message(job.chat_id, f"🎨 Generando {job.task_id}...")
     job.status_message_id = status.message_id
 
+    # Lanzamos el editor de progreso en vivo para que el mensaje de
+    # status muestre la barra y ETA reales del WebUI. Se cierra en el
+    # finally junto con el borrado del mensaje.
+    from .jobs.progress_reporter import ProgressEditor
+    editor = ProgressEditor(
+        bot=bot,
+        chat_id=job.chat_id,
+        status_message_id=status.message_id,
+        label=f"🎨 Generando {job.task_id} (txt2img)",
+        sd=sd,
+        interval=3.0,
+        total_steps_label=f"{params.steps} pasos",
+    )
+    editor_task = asyncio.create_task(editor.run(), name=f"progress-{job.task_id}")
+
     try:
         from .sd.client import build_txt2img_payload
         generation = load_generation_settings()
@@ -104,6 +119,13 @@ async def _handle_job(job: Job, bot: Bot, sd: SDClient, jobs: JobManager) -> Non
             log.exception("No pude notificar el fallo al chat %s", job.chat_id)
 
     finally:
+        # Cerramos el editor de progreso antes de borrar el mensaje, si
+        # no podría intentar editar un mensaje que ya no existe.
+        editor.request_stop()
+        try:
+            await asyncio.wait_for(editor_task, timeout=2.0)
+        except asyncio.TimeoutError:
+            editor_task.cancel()
         chat_id = job.chat_id
         status_id = getattr(job, "status_message_id", None)
         if status_id is not None:

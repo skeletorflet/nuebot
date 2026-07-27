@@ -193,9 +193,45 @@ async def _run_txt2img(
     status_label: str | None = None,
 ) -> tuple[str, bytes] | None:
     """Devuelve (task_id_nuevo, png_bytes). None si falla."""
+    import asyncio as _asyncio
+    from ..jobs.progress_reporter import ProgressEditor as _PE
+
     status_id = None
+    editor_task = None
     if status_label:
         status_id = await _send_status(bot, chat_id, status_label, reply_to)
+        if status_id is not None and with_hr:
+            # Avisamos el plan completo de pasos al usuario: el primer
+            # pass hace ``steps`` y el segundo hace ``steps * ratio``.
+            from ..config import load_generation_settings as _lgs
+            from ..sd.client import build_hr_block as _bhr
+            try:
+                ratio = (_lgs().hr.get("hr_second_pass_ratio") or 0.5)
+                steps_total = max(1, int(params.steps * float(ratio)))
+                total_label = f"{params.steps} base + {steps_total} HR ({int(round(float(ratio) * 100))}%)"
+            except Exception:
+                total_label = None
+            editor = _PE(
+                bot=bot,
+                chat_id=chat_id,
+                status_message_id=status_id,
+                label=status_label + " · HR",
+                sd=sd,
+                interval=3.0,
+                total_steps_label=total_label,
+            )
+            editor_task = _asyncio.create_task(editor.run(), name=f"progress-hr-{status_id}")
+        elif status_id is not None:
+            editor = _PE(
+                bot=bot,
+                chat_id=chat_id,
+                status_message_id=status_id,
+                label=status_label,
+                sd=sd,
+                interval=3.0,
+                total_steps_label=f"{params.steps} pasos",
+            )
+            editor_task = _asyncio.create_task(editor.run(), name=f"progress-{status_id}")
     try:
         generation = load_generation_settings()
         await sd.post_options(generation.post_options)
@@ -230,6 +266,12 @@ async def _run_txt2img(
         await bot.send_document(chat_id, document=document, caption=caption, reply_markup=markup)
         return new_id, png
     finally:
+        if editor_task is not None:
+            editor.request_stop()
+            try:
+                await _asyncio.wait_for(editor_task, timeout=2.0)
+            except _asyncio.TimeoutError:
+                editor_task.cancel()
         await _delete_status(bot, chat_id, status_id)
 
 
@@ -278,6 +320,8 @@ async def on_hr(callback: CallbackQuery, callback_data: HR, bot: Bot,
 @router.callback_query(FinalUpscale.filter())
 async def on_final(callback: CallbackQuery, callback_data: FinalUpscale,
                    bot: Bot, jobs: JobManager, sd) -> None:
+    import asyncio as _asyncio
+    from ..jobs.progress_reporter import ProgressEditor as _PE
     await callback.answer("💎 Upscale Final...")
     params = _resolve_params(callback, jobs, callback_data.task_id)
     if params is None:
@@ -289,6 +333,17 @@ async def on_final(callback: CallbackQuery, callback_data: FinalUpscale,
     generation = load_generation_settings()
     status_id = await _send_status(bot, callback.message.chat.id,
                                   "💎 Upscale Final...", callback.message.message_id)
+    upscale_factor = generation.final_upscale.get("upscaling_resize", 3.0)
+    editor = _PE(
+        bot=bot,
+        chat_id=callback.message.chat.id,
+        status_message_id=status_id,
+        label=f"💎 Upscale Final ({upscale_factor}x)",
+        sd=sd,
+        interval=4.0,
+        total_steps_label=f"{params.steps} pasos txt2img + x{upscale_factor:g} upscale",
+    )
+    editor_task = _asyncio.create_task(editor.run(), name=f"progress-final-{status_id}")
     try:
         # Re-generamos con los mismos params en txt2img normal (rápido) y después
         # le pasamos la imagen al upscaler extra. Es la única forma de tener un
@@ -329,6 +384,12 @@ async def on_final(callback: CallbackQuery, callback_data: FinalUpscale,
             reply_markup=kb_final(new_id),
         )
     finally:
+        if editor_task is not None:
+            editor.request_stop()
+            try:
+                await _asyncio.wait_for(editor_task, timeout=2.0)
+            except _asyncio.TimeoutError:
+                editor_task.cancel()
         await _delete_status(bot, callback.message.chat.id, status_id)
 
 
