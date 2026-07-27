@@ -4,7 +4,7 @@
     "width": 832,
     "height": 1216,
     "steps": 30,
-    "cfg_scale": 4.5,
+    "cfg_scale": 5,
     "sampler_name": "Euler a",
     "scheduler": "Simple",
     "seed": -1,
